@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/pointage")
 public interface PointageController {
     @PostMapping("/pointer")
-    public ResponseEntity<?> pointageEtudiant(@RequestBody EtudiantScanDto etudiantScanDto, Long utilisateurId, BindingResult bindingResult);
+    public ResponseEntity<?> pointageEtudiant(@RequestBody EtudiantScanDto etudiantScanDto, BindingResult bindingResult);
 }

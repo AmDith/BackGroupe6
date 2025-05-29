@@ -13,6 +13,7 @@ public class Pointage {
     @Id
     private String id;
     private LocalDate date;
+    private String heurePointage;
     private Integer HeureDb;
     private Integer HeureFin;
     private Pointer pointer;

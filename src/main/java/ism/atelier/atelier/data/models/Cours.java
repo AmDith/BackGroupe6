@@ -14,6 +14,7 @@ public class Cours {
     private String id;
     private Integer nbreHeure;
     private String semestre;
+    private boolean actif;
 
     private List<String> seanceCoursIds = new ArrayList<>();
     private String professeurId;

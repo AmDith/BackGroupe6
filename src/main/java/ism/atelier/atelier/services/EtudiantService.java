@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface EtudiantService {
     List<Absence> listerMesAbsences();
-//    List<Pointage> listerMesRetards(Long userConnecteId);
     void justifierAbsence(Pointage pointage);
+    Etudiant findByMatricule(String matricule);
+
 }

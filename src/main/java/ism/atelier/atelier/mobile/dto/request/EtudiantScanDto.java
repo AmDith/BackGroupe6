@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class EtudiantScanDto {
-    private String nomComple;
     private String matriculeE;
-    private Long classeId;
+    private String utilisateurId;
 }

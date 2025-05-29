@@ -7,5 +7,5 @@ import ism.atelier.atelier.data.models.Pointage;
 import java.util.List;
 
 public interface PointageService {
-    void pointerEtudiant(Etudiant etudiant, Long utilisateurId);
+    Pointage pointerEtudiant(Etudiant etudiant);
 }
