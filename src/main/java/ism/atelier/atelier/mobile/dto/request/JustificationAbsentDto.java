@@ -1,0 +1,17 @@
+package ism.atelier.atelier.mobile.dto.request;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class JustificationAbsentDto {
+    private Long pointageId;
+    @NotNull(message = "Le motif est obligatoire")
+    private String motifs;
+    @NotNull(message = "Le titre est obligatoire")
+    private String titre;
+    @NotNull(message = "Le piece jointe est obligatoire")
+    private String pieceJointe;
+}
