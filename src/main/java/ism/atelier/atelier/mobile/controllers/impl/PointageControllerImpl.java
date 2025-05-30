@@ -1,11 +1,13 @@
 package ism.atelier.atelier.mobile.controllers.impl;
 
 import ism.atelier.atelier.data.enums.Pointer;
-import ism.atelier.atelier.data.models.Absence;
+import ism.atelier.atelier.data.models.Classe;
 import ism.atelier.atelier.data.models.Pointage;
 import ism.atelier.atelier.mobile.controllers.PointageController;
 import ism.atelier.atelier.mobile.dto.request.EtudiantScanDto;
+import ism.atelier.atelier.security.dto.RestResponseSecurity;
 import ism.atelier.atelier.services.*;
+import ism.atelier.atelier.utils.mappers.impl.EtudiantMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class PointageControllerImpl implements PointageController {
     private final EtudiantService etudiantService;
     private final CoursService coursService;
     private final SeanceCoursService seanceCoursService;
-    private final AbsenceService absenceService;
+    private final ClasseService classeService;
 
     @Override
     public ResponseEntity<?> pointageEtudiant(EtudiantScanDto etudiantScanDto, BindingResult bindingResult) {
@@ -119,22 +121,21 @@ public class PointageControllerImpl implements PointageController {
                 pointage.setPointer(Pointer.Retard);
             }
         }
-
-        // Si l'étudiant n'a pointé sur aucun des deux intervalles, créer une absence
-//        if (!aPointeIntervalle1 && !aPointeIntervalle2) {
-//            for (Pointage p : pointagesEtudiant) {
-//                if (p.getPointer() == Pointer.Abscent) {
-//                    Absence absence = new Absence();
-//                    absence.setPointageId(p.getId());
-//                    absence.setJustificationId(null); // à remplir plus tard si nécessaire
-//                    absenceService.save(absence);
-//                }
-//            }
-//        }
         pointageService.save(pointage);
-        return ResponseEntity.ok("✅ Pointage effectué avec succès.");
+
+            String nomClasse = null;
+            if (etudiant.getClasseId() != null) {
+                Classe classe = classeService.getClasse(etudiant.getClasseId());
+                if (classe != null) {
+                    nomClasse = classe.getName();
+                }
+            }
+            var qrcodeEtudiantDto = EtudiantMapper.toQRcodeEtudiantDto(etudiant, nomClasse);
+            Map<String, Object> response = RestResponseSecurity.response(
+                    HttpStatus.OK,
+                    qrcodeEtudiantDto,
+                    "QRcodeEtudiantDto"
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
-
 }

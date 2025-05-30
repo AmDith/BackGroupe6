@@ -6,6 +6,7 @@ import ism.atelier.atelier.data.repository.ClasseRepository;
 import ism.atelier.atelier.security.controllers.UtilisateurSecurityController;
 import ism.atelier.atelier.security.dto.RestResponseSecurity;
 import ism.atelier.atelier.security.dto.request.UtilisateurConneteDto;
+import ism.atelier.atelier.services.ClasseService;
 import ism.atelier.atelier.services.UtilisateurService;
 import ism.atelier.atelier.utils.mappers.impl.UtilisateurMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.NoSuchElementException;
 @RestController
 public class UtilisateurControllerImpl implements UtilisateurSecurityController {
     private final UtilisateurService utilisateurService;
-    private final ClasseRepository classeRepository;
+    private final ClasseService classeService;
 
     @Override
     public ResponseEntity<?> connexion( UtilisateurConneteDto user, BindingResult bindingResult) {
@@ -41,8 +42,7 @@ public class UtilisateurControllerImpl implements UtilisateurSecurityController 
             if (utilisateur.getEtudiant() != null) {
                 String nomClasse = null;
                 if (utilisateur.getEtudiant().getClasseId() != null) {
-                    Classe classe = classeRepository.findById(utilisateur.getEtudiant().getClasseId())
-                            .orElse(null);
+                    Classe classe = classeService.getClasse(utilisateur.getEtudiant().getClasseId());
                     if (classe != null) {
                         nomClasse = classe.getName();
                     }

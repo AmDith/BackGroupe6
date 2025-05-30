@@ -1,6 +1,6 @@
 package ism.atelier.atelier.utils.mappers.impl;
 
-import ism.atelier.atelier.data.models.Classe;
+
 import ism.atelier.atelier.data.models.Utilisateur;
 import ism.atelier.atelier.security.dto.request.UtilisateurConneteDto;
 import ism.atelier.atelier.security.dto.response.EtudiantResponseDto;
