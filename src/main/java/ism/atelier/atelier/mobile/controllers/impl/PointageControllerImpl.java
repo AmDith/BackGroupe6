@@ -1,11 +1,11 @@
 package ism.atelier.atelier.mobile.controllers.impl;
 
+import ism.atelier.atelier.data.enums.Pointer;
+import ism.atelier.atelier.data.models.Absence;
+import ism.atelier.atelier.data.models.Pointage;
 import ism.atelier.atelier.mobile.controllers.PointageController;
 import ism.atelier.atelier.mobile.dto.request.EtudiantScanDto;
-import ism.atelier.atelier.services.impl.EtudiantServiceImpl;
-import ism.atelier.atelier.services.impl.PointageServiceImpl;
-import ism.atelier.atelier.utils.mappers.impl.EtudiantMapper;
-import ism.atelier.atelier.utils.mappers.impl.PointageMapper;
+import ism.atelier.atelier.services.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +13,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 public class PointageControllerImpl implements PointageController {
-    private final PointageServiceImpl pointageService;
-    private final EtudiantServiceImpl etudiantService;
+    private final PointageService pointageService;
+    private final EtudiantService etudiantService;
+    private final CoursService coursService;
+    private final SeanceCoursService seanceCoursService;
+    private final AbsenceService absenceService;
 
     @Override
     public ResponseEntity<?> pointageEtudiant(EtudiantScanDto etudiantScanDto, BindingResult bindingResult) {
@@ -33,12 +38,103 @@ public class PointageControllerImpl implements PointageController {
             }
             return ResponseEntity.badRequest().body(errors);
         }
+
         var etudiant = etudiantService.findByMatricule(etudiantScanDto.getMatriculeE());
         if (etudiant == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Étudiant introuvable");
         }
-        LocalDate nowDate = LocalDate.now();
+
+
         LocalTime nowTime = LocalTime.now();
-        return null;
+
+        var cours = coursService.getCoursActifDeLaClasse(etudiant.getClasseId());
+        var seanceCours = seanceCoursService.getSeanceActuelleDuCours(cours);
+        if (seanceCours == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucune séance en cours");
+        }
+
+        Duration dureeSeance = Duration.between(seanceCours.getHeureDb(), seanceCours.getHeureFin());
+
+        LocalTime debutIntervalle1 = seanceCours.getHeureDb().plusMinutes(90);
+        LocalTime finIntervalle1 = seanceCours.getHeureDb().plusMinutes(120);
+        LocalTime debutIntervalle2 = seanceCours.getHeureDb().plusMinutes(210);
+        LocalTime finIntervalle2 = seanceCours.getHeureFin();
+
+        boolean estDansIntervalle1 = !nowTime.isBefore(debutIntervalle1) && !nowTime.isAfter(finIntervalle1);
+        boolean estDansIntervalle2 = dureeSeance.toHours() > 2 && !nowTime.isBefore(debutIntervalle2) && !nowTime.isAfter(finIntervalle2);
+
+        if (!estDansIntervalle1 && !estDansIntervalle2) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("⛔ Hors de l'intervalle de pointage autorisé !");
+        }
+
+        List<Pointage> pointages = pointageService.getPointagesBySeance(seanceCours.getId());
+        List<Pointage> pointagesEtudiant = pointages.stream()
+                .filter(p -> etudiant.getId().equals(p.getEtudiant()) && p.getEtudiant() != null)
+                .toList();
+
+        boolean aPointeIntervalle1 = pointagesEtudiant.stream()
+                .anyMatch(p -> {
+                    if (p.getHeurePointage() == null) return false;
+                    LocalTime heureP = p.getHeurePointage();
+                    return !heureP.isBefore(debutIntervalle1) && !heureP.isAfter(finIntervalle1);
+                });
+
+        boolean aPointeIntervalle2 = pointagesEtudiant.stream()
+                .anyMatch(p -> {
+                    if (p.getHeurePointage() == null) return false;
+                    LocalTime heureP = p.getHeurePointage();
+                    return !heureP.isBefore(debutIntervalle2) && !heureP.isAfter(finIntervalle2);
+                });
+
+
+
+        // Vérifier si l'étudiant a déjà pointé dans cet intervalle
+        if ((estDansIntervalle1 && aPointeIntervalle1) || (estDansIntervalle2 && aPointeIntervalle2)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("⚠️ Vous avez déjà pointé dans cet intervalle.");
+        }
+
+        Optional<Pointage> pointageSlot = pointages.stream()
+                .filter(p -> p.getEtudiant() == null || p.getEtudiant().trim().isEmpty())
+                .findFirst();
+
+        if (pointageSlot.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucun slot de pointage disponible.");
+        }
+
+        Pointage pointage = pointageSlot.get();
+        pointage.setEtudiant(etudiant.getId());
+        pointage.setUtilisateur(etudiantScanDto.getUtilisateurId());
+        pointage.setHeurePointage(nowTime);
+
+        if (dureeSeance.toHours() <= 2 || estDansIntervalle1) {
+            pointage.setHeureDb(debutIntervalle1);
+            pointage.setHeureFin(finIntervalle1);
+            pointage.setPointer(Pointer.Present);
+        } else if (estDansIntervalle2) {
+            pointage.setHeureDb(debutIntervalle2);
+            pointage.setHeureFin(finIntervalle2);
+            if (aPointeIntervalle1) {
+                pointage.setPointer(Pointer.Present);
+            } else {
+                pointage.setPointer(Pointer.Retard);
+            }
+        }
+
+        // Si l'étudiant n'a pointé sur aucun des deux intervalles, créer une absence
+//        if (!aPointeIntervalle1 && !aPointeIntervalle2) {
+//            for (Pointage p : pointagesEtudiant) {
+//                if (p.getPointer() == Pointer.Abscent) {
+//                    Absence absence = new Absence();
+//                    absence.setPointageId(p.getId());
+//                    absence.setJustificationId(null); // à remplir plus tard si nécessaire
+//                    absenceService.save(absence);
+//                }
+//            }
+//        }
+        pointageService.save(pointage);
+        return ResponseEntity.ok("✅ Pointage effectué avec succès.");
     }
+
+
+
 }

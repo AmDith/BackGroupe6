@@ -1,11 +1,11 @@
 package ism.atelier.atelier.services;
 
-import ism.atelier.atelier.data.enums.Pointer;
-import ism.atelier.atelier.data.models.Etudiant;
+
 import ism.atelier.atelier.data.models.Pointage;
 
 import java.util.List;
 
 public interface PointageService {
-    Pointage pointerEtudiant(Etudiant etudiant);
+    List<Pointage> getPointagesBySeance(String seanceId);
+    Pointage save(Pointage pointage);
 }

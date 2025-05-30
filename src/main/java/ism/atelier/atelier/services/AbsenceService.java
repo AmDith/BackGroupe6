@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AbsenceService {
     List<Absence> listerToutPointageAbscent();
+    Absence save(Absence absence);
 }

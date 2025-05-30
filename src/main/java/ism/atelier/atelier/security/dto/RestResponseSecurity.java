@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RestResponseWeb {
+public class RestResponseSecurity {
     public static Map<String, Object> response(
             HttpStatus status,
             Object data,
