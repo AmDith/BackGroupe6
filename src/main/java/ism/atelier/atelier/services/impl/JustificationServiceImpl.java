@@ -29,6 +29,11 @@ public class JustificationServiceImpl implements JustificationService {
 //    }
 
     @Override
+    public Justification valider(Long id, String statut) {
+        return null;
+    }
+
+    @Override
     public Justification ajouterJustification(JustificationAbsentDto justificationDto) {
         Justification justification = new Justification();
         justification.setId(justificationDto.getPointageId().toString());
@@ -46,8 +51,9 @@ public class JustificationServiceImpl implements JustificationService {
         return justificationRepository.findById(id).orElse(null);
     }
 
+
     @Override
-    public List<Justification> getJustificationsByEtudiant(Long etudiantId) {
+    public Justification getJustificationsByEtudiant(Long etudiantId) {
 
         return justificationRepository.findByEtudiantId(etudiantId);
     }
@@ -59,7 +65,13 @@ public class JustificationServiceImpl implements JustificationService {
     }
 
     @Override
-    public void supprimerJustification(Long id) {
+    public void supprimerJustification(String id) {
+
         justificationRepository.deleteById(id);
+    }
+
+    @Override
+    public Justification save(Justification justification) {
+        return justificationRepository.save(justification);
     }
 }

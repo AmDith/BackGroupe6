@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface JustificationService {
 //    List<Justification> listerJustification();
-//    Justification valider(String id, String statut);
+    Justification valider(Long id, String statut);
     Justification ajouterJustification(JustificationAbsentDto justificationDto);
     Justification getJustificationById(Long id);
-    List<Justification> getJustificationsByEtudiant(Long etudiantId);
+    Justification getJustificationsByEtudiant(Long etudiantId);
     List<Justification> getAllJustifications();
     void supprimerJustification(Long id);
+    Justification save(Justification justification);
 }

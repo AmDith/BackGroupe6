@@ -6,8 +6,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 
-public interface JustificationRepository extends MongoRepository<Justification, Long> {
-        List<Justification> findByEtudiantId(Long etudiantId);
+public interface JustificationRepository extends MongoRepository<Justification, String> {
+        Justification findByEtudiantId(Long etudiantId);
+//        List<Justification> findAll();
 
-        Long id(String id);
+
 }

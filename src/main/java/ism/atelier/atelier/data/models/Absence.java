@@ -13,11 +13,9 @@ import java.time.LocalDate;
 public class Absence {
     @Id
     private String id;
-    private LocalDate date;
-    private String Cours;
-    private String HeureD;
-    private String HeureF;
-    private EnumJustification etat;
+    private String  justificationId;
+    private String pointageId;
+
 //    private String  justificationId;
 //    private String pointageId;
 }

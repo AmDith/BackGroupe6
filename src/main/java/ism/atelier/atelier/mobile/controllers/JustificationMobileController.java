@@ -12,9 +12,11 @@ import java.util.Map;
 @RequestMapping("/api/justification")
 public interface JustificationMobileController {
     @PostMapping("/justificatifAbsent")
-    public ResponseEntity<?> justificatif(@Valid @RequestBody JustificationAbsentDto justificationDto, BindingResult bindingResult);
+    ResponseEntity<?> justificatif(@Valid @RequestBody JustificationAbsentDto justificationDto, BindingResult bindingResult);
 
     @PutMapping("/{id}/valider")
-    ResponseEntity<?> validerJustification(@PathVariable String id, @RequestParam EnumJustification enumJustification);
+    ResponseEntity<?> validerJustification(@PathVariable Long id, @RequestParam EnumJustification enumJustification);
 
+    @GetMapping("/{id}")
+    ResponseEntity<Map<String, Object>> getById(@PathVariable Long id) ;
 }
