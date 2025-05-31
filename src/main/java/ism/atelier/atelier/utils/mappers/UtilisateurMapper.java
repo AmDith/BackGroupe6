@@ -1,5 +1,6 @@
 package ism.atelier.atelier.utils.mappers;
 
+import ism.atelier.atelier.data.models.Role;
 import ism.atelier.atelier.data.models.Utilisateur;
 import ism.atelier.atelier.security.dto.request.UtilisateurConneteDto;
 import ism.atelier.atelier.security.dto.response.EtudiantResponseDto;
@@ -11,8 +12,8 @@ import org.mapstruct.factory.Mappers;
 public interface UtilisateurMapper {
     UtilisateurMapper INSTANCE = Mappers.getMapper(UtilisateurMapper.class);
 
-    Utilisateur toEntity(UtilisateurConneteDto utilisateurConneteDto);
-    EtudiantResponseDto toEtudiantResponseDto(Utilisateur utilisateur);
-    UtilisateurResponseDto toUtilisateurResponseDto(Utilisateur utilisateur);
+    //Utilisateur toEntity(UtilisateurConneteDto utilisateurConneteDto);
+    //EtudiantResponseDto toEtudiantResponseDto(Utilisateur utilisateur, String nomClasse, Role role);
+    //UtilisateurResponseDto toUtilisateurResponseDto(Utilisateur utilisateur, Role role);
 
 }

@@ -12,4 +12,5 @@ public class EtudiantResponseDto {
     private String matriculeE;
     private String nomComplet;
     private String nomClasse;
+    private String nomRole;
 }

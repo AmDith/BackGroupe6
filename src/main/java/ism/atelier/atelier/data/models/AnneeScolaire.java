@@ -10,5 +10,4 @@ import java.util.List;
 @Document(collection = "anneeScolaire")
 @Data
 public class AnneeScolaire extends AbstractEntity{
-    private List<String> coursIds = new ArrayList<>();
 }

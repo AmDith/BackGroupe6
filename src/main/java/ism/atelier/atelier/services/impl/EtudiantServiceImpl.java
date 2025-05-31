@@ -28,4 +28,9 @@ public class EtudiantServiceImpl implements EtudiantService {
     public Etudiant findByMatricule(String matricule) {
         return etudiantRepository.findByMatriculeE(matricule);
     }
+
+    @Override
+    public Etudiant findById(String etudiantId) {
+        return etudiantRepository.findById(etudiantId).orElse(null);
+    }
 }

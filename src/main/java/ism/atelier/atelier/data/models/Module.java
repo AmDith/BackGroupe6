@@ -9,5 +9,4 @@ import java.util.List;
 @Document(collection = "module")
 @Data
 public class Module extends AbstractEntity{
-    private List<String> coursIds = new ArrayList<>();
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 @Builder
 @Data
 public class UtilisateurResponseDto {
-    private Long id;
+    private String id;
     private String nomUtilisateur;
+    private String nomRole;
 }

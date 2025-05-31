@@ -9,5 +9,4 @@ import java.util.List;
 @Document(collection = "niveau")
 @Data
 public class Niveau  extends AbstractEntity{
-    private List<String> classeIds = new ArrayList<>();
 }

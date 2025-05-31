@@ -15,8 +15,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur seConnecter(Utilisateur utilisateur) {
+        if (utilisateur.getLogin() == null || utilisateur.getPassword() == null) {
+            throw new IllegalArgumentException("Login et mot de passe sont requis");
+        }
+
         return utilisateurRepository.findByLogin(utilisateur.getLogin())
                 .filter(u -> u.getPassword().equals(utilisateur.getPassword()))
-                .orElseThrow(() -> new NoSuchElementException("Login ou mot de passe incorrect"));
+                .orElseThrow(() -> new RuntimeException("Login ou mot de passe incorrect"));
     }
 }

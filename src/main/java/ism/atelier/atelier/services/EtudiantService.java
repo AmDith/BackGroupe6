@@ -7,5 +7,6 @@ public interface EtudiantService {
     List<Absence> listerMesAbsences();
     void justifierAbsence(Pointage pointage);
     Etudiant findByMatricule(String matricule);
+    Etudiant findById(String etudiantId);
 
 }

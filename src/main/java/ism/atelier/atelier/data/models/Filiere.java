@@ -10,10 +10,4 @@ import java.util.List;
 @Document(collection = "filiere")
 @Data
 public class Filiere extends  AbstractEntity{
-    public Filiere() {}
-
-    public Filiere(String name) {
-        setName(name);
-    }
-    private List<String> classeIds = new ArrayList<>();
 }
