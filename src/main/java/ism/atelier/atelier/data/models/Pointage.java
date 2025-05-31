@@ -17,7 +17,6 @@ public class Pointage {
     private Integer HeureFin;
     private Pointer pointer;
 
-
     private String utilisateur;
     private String etudiant;
     private String seanceCours;

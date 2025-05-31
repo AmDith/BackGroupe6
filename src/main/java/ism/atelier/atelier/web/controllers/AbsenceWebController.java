@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
-@RequestMapping("/api/abscence")
+@RequestMapping("/web/absences")
 public interface AbsenceWebController {
-    @GetMapping("/listes")
-    public ResponseEntity<Map<String, Object>> listerAbsents();
+    @GetMapping("")
+    ResponseEntity<Map<String, Object>> listerAbsents();
 }

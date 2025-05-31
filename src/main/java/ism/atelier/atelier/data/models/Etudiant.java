@@ -1,5 +1,6 @@
 package ism.atelier.atelier.data.models;
 
+import ism.atelier.atelier.data.enums.Mensualite;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 public class Etudiant extends Personne{
     private String matriculeE;
+    private Mensualite mensualite;
 
 
     private String classeId;
