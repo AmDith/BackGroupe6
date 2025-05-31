@@ -1,5 +1,6 @@
 package ism.atelier.atelier.utils.mappers;
 
+import ism.atelier.atelier.data.models.Absence;
 import ism.atelier.atelier.data.models.Justification;
 import ism.atelier.atelier.mobile.dto.request.JustificationAbsentDto;
 import ism.atelier.atelier.web.dto.request.ValiderJustificationDto;
@@ -11,5 +12,5 @@ import org.mapstruct.factory.Mappers;
 public interface JustificationMapper {
     JustificationMapper INSTANCE = Mappers.getMapper(JustificationMapper.class);
 
-   JustificationListWebDto toListWebDto(Justification justification);
+   public JustificationListWebDto toListWebDto(Absence absence, Justification justification);
 }

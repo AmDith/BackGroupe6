@@ -15,58 +15,49 @@ import java.util.List;
 public class JustificationServiceImpl implements JustificationService {
     private final JustificationRepository justificationRepository;
 
-//    @Override
-//    public Justification valider(String id, String statut) {
-//        Justification justification =  getJustificationById(id);
-//        EnumJustification enumJustification;
-//        try {
-//            enumJustification = EnumJustification.valueOf(statut);
-//        } catch (IllegalArgumentException e) {
-//            throw new IllegalArgumentException("Statut invalide");
-//        }
-//        justification.setEnumJustification(enumJustification);
-//        return justificationRepository.save(justification);
-//    }
-
     @Override
-    public Justification valider(Long id, String statut) {
-        return null;
+    public Justification valider(String id, String statut) {
+        Justification justification = getJustificationById(id);
+        if (justification == null) {
+            return null;
+        }
+        try {
+            EnumJustification enumJustification = EnumJustification.valueOf(statut);
+            justification.setEnumJustification(enumJustification);
+            return justificationRepository.save(justification);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Statut invalide");
+        }
     }
 
     @Override
     public Justification ajouterJustification(JustificationAbsentDto justificationDto) {
         Justification justification = new Justification();
-        justification.setId(justificationDto.getPointageId().toString());
+        justification.setId(justificationDto.getAbsenceId());
         justification.setMotifs(justificationDto.getMotifs());
         justification.setTitre(justificationDto.getTitre());
         justification.setPieceJointe(justificationDto.getPieceJointe());
-        justification.setEnumJustification(EnumJustification.valueOf(""));
-
+        justification.setEnumJustification(EnumJustification.EnCours);
         return justificationRepository.save(justification);
     }
 
     @Override
-    public Justification getJustificationById(Long id) {
-
+    public Justification getJustificationById(String id) {
         return justificationRepository.findById(id).orElse(null);
     }
 
-
     @Override
-    public Justification getJustificationsByEtudiant(Long etudiantId) {
-
+    public Justification getJustificationsByEtudiant(String etudiantId) {
         return justificationRepository.findByEtudiantId(etudiantId);
     }
 
     @Override
     public List<Justification> getAllJustifications() {
-
         return justificationRepository.findAll();
     }
 
     @Override
     public void supprimerJustification(String id) {
-
         justificationRepository.deleteById(id);
     }
 

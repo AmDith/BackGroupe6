@@ -1,6 +1,7 @@
 package ism.atelier.atelier.utils.mappers;
 
 import ism.atelier.atelier.data.models.Etudiant;
+import ism.atelier.atelier.mobile.dto.request.EtudiantScanDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

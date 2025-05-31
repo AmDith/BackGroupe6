@@ -9,5 +9,5 @@ public interface PointageMapper {
     PointageMapper INSTANCE = Mappers.getMapper(PointageMapper.class);
 
     //    UtilisateurConneteDto toDto(Utilisateur utilisateur);
-    Pointage toEntity(PointageJustificationAbsentDto pointageDto);
+//    Pointage toEntity(PointageJustificationAbsentDto pointageDto);
 }

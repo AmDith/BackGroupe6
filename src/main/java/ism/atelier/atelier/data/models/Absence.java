@@ -15,6 +15,7 @@ public class Absence {
     private String id;
     private String  justificationId;
     private String pointageId;
+    private String statut;
 
 //    private String  justificationId;
 //    private String pointageId;

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -16,6 +17,13 @@ public class AbsenceServiceImpl implements AbsenceService {
     public List<Absence> listerToutPointageAbscent() {
 
         return absenceRepository.findAll();
+    }
+
+    @Override
+    public List<Absence> getAllAsenceJustifier() {
+        return absenceRepository.findAll().stream()
+                .filter(absence -> absence.getJustificationId() != null)
+                .collect(Collectors.toList());
     }
 
     @Override
