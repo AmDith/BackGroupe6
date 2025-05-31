@@ -26,12 +26,12 @@ public class RoleMock implements CommandLineRunner {
             roles.add(role1);
 
             Role role2 = new Role();
-            role1.setId("2");
+            role2.setId("2");
             role2.setName("ETUDIANT");
             roles.add(role2);
 
             Role role3 = new Role();
-            role1.setId("3");
+            role3.setId("3");
             role3.setName("VIGILE");
             roles.add(role3);
         }

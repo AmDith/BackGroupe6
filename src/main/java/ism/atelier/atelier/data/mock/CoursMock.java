@@ -42,6 +42,18 @@ public class CoursMock implements CommandLineRunner {
             cours2.setClasseId("2");
             cours2.setModuleId("2");
             cours.add(cours2);
+
+            Cours cours3 = new Cours();
+            cours3.setId("3");
+            cours3.setNbreHeure(2);
+            cours3.setSemestre("semestre 6");     // 8h00
+            cours3.setActif(false);   // 12h00
+            cours3.getSeanceCoursIds().add("3");
+            cours3.setProfesseurId("1");
+            cours3.setAnneeScolaireId("1");
+            cours3.setClasseId("1");
+            cours3.setModuleId("3");
+            cours.add(cours3);
         }
         coursRepository.saveAll(cours);
     }
