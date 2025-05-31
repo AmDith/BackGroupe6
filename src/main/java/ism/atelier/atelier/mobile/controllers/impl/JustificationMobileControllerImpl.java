@@ -29,6 +29,7 @@ public class JustificationMobileControllerImpl implements JustificationMobileCon
     @Override
     public ResponseEntity<?> justificatif(JustificationAbsentDto justificationDto,
                                           BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {

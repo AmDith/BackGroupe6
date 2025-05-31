@@ -16,6 +16,7 @@ import java.util.List;
 public class RoleMock implements CommandLineRunner {
     private final RoleRepository roleRepo;
 
+
     @Override
     public void run(String... args) {
         List<Role> roles = roleRepo.findAll();

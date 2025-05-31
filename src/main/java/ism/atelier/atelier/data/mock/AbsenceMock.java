@@ -6,11 +6,13 @@ import ism.atelier.atelier.data.repository.AbsenceRepository;
 import ism.atelier.atelier.data.repository.JustificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Order(13)
 @Component
 @RequiredArgsConstructor
 public class AbsenceMock implements CommandLineRunner {

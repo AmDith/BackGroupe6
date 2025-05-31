@@ -4,11 +4,13 @@ import ism.atelier.atelier.data.models.Justification;
 import ism.atelier.atelier.data.repository.JustificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Order(14)
 @Component
 @RequiredArgsConstructor
 public class JustificationMock implements CommandLineRunner {

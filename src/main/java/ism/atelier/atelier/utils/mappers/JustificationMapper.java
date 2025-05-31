@@ -7,8 +7,9 @@ import ism.atelier.atelier.web.dto.request.ValiderJustificationDto;
 import ism.atelier.atelier.web.dto.response.JustificationListWebDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface JustificationMapper {
     JustificationMapper INSTANCE = Mappers.getMapper(JustificationMapper.class);
 

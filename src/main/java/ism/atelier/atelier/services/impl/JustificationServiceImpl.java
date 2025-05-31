@@ -56,10 +56,6 @@ public class JustificationServiceImpl implements JustificationService {
         return justificationRepository.findAll();
     }
 
-    @Override
-    public void supprimerJustification(String id) {
-        justificationRepository.deleteById(id);
-    }
 
     @Override
     public Justification save(Justification justification) {

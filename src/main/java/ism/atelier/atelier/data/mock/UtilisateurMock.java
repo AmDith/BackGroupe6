@@ -25,8 +25,8 @@ public class UtilisateurMock implements CommandLineRunner {
             vigile.setLogin("tidiane.ba");
             vigile.setPassword("123456");
             vigile.setRoleId("3");
-            vigile.setEtudiantId(null);
-            vigile.setProfesseurId(null);
+//            vigile.setEtudiantId(null);
+//            vigile.setProfesseurId(null);
             vigile.getPointageIds().add("1");
             vigile.getPointageIds().add("3");
             utilisateurs.add(vigile);
@@ -38,8 +38,8 @@ public class UtilisateurMock implements CommandLineRunner {
             prof2.setLogin("amina.diop");
             prof2.setPassword("profpass");
             prof2.setRoleId("3");
-            prof2.setEtudiantId(null);
-            prof2.setProfesseurId("1");
+//            prof2.setEtudiantId(null);
+//            prof2.setProfesseurId("1");
             prof2.getPointageIds().add("2");
             utilisateurs.add(prof2);
 
@@ -50,8 +50,8 @@ public class UtilisateurMock implements CommandLineRunner {
             prof1.setLogin("ousmane.dia");
             prof1.setPassword("profpass");
             prof1.setRoleId("3");
-            prof1.setEtudiantId(null);
-            prof1.setProfesseurId("2");
+//            prof1.setEtudiantId(null);
+//            prof1.setProfesseurId("2");
             prof1.getPointageIds().add(null);
             utilisateurs.add(prof1);
 
@@ -62,8 +62,8 @@ public class UtilisateurMock implements CommandLineRunner {
             et1.setLogin("tina.ba");
             et1.setPassword("etupass");
             et1.setRoleId("2");
-            et1.setEtudiantId("1");
-            et1.setProfesseurId(null);
+//            et1.setEtudiantId("1");
+//            et1.setProfesseurId(null);
             et1.getPointageIds().add(null);
             utilisateurs.add(et1);
 
@@ -74,8 +74,8 @@ public class UtilisateurMock implements CommandLineRunner {
             et2.setLogin("henry.tall");
             et2.setPassword("etupass");
             et2.setRoleId("2");
-            et2.setEtudiantId("2");
-            et2.setProfesseurId(null);
+//            et2.setEtudiantId("2");
+//            et2.setProfesseurId(null);
             et2.getPointageIds().add(null);
             utilisateurs.add(et2);
 
@@ -86,8 +86,8 @@ public class UtilisateurMock implements CommandLineRunner {
             et3.setLogin("françois.du.mbote");
             et3.setPassword("etupass");
             et3.setRoleId("2");
-            et3.setEtudiantId("3");
-            et3.setProfesseurId(null);
+//            et3.setEtudiantId("3");
+//            et3.setProfesseurId(null);
             et3.getPointageIds().add(null);
             utilisateurs.add(et3);
 
@@ -98,8 +98,8 @@ public class UtilisateurMock implements CommandLineRunner {
             et4.setLogin("silverstar");
             et4.setPassword("etupass");
             et4.setRoleId("2");
-            et4.setEtudiantId("4");
-            et4.setProfesseurId(null);
+//            et4.setEtudiantId("4");
+//            et4.setProfesseurId(null);
             et4.getPointageIds().add(null);
             utilisateurs.add(et4);
 
@@ -110,8 +110,8 @@ public class UtilisateurMock implements CommandLineRunner {
             et5.setLogin("dith.dith");
             et5.setPassword("etupass");
             et5.setRoleId("2");
-            et5.setEtudiantId("5");
-            et5.setProfesseurId(null);
+//            et5.setEtudiantId("5");
+//            et5.setProfesseurId(null);
             et5.getPointageIds().add(null);
             utilisateurs.add(et5);
 
@@ -122,8 +122,8 @@ public class UtilisateurMock implements CommandLineRunner {
             admin.setLogin("amour");
             admin.setPassword("adminpass");
             admin.setRoleId("1");
-            admin.setEtudiantId(null);
-            admin.setProfesseurId(null);
+//            admin.setEtudiantId(null);
+//            admin.setProfesseurId(null);
             admin.getPointageIds().add(null);
             utilisateurs.add(admin);
 

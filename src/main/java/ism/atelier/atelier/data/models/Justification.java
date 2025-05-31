@@ -13,5 +13,6 @@ public class Justification {
     private String motifs;
     private String titre;
     private String pieceJointe;
+    private String etudiantId;
     private EnumJustification enumJustification;
 }

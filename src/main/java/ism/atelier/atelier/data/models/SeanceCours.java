@@ -18,6 +18,7 @@ public class SeanceCours {
     private LocalTime HeureDb;
     private LocalTime HeureFin;
 
-    private String cours;
+    private String coursId;
+    private Boolean Now;
     private List<String> pointageIds = new ArrayList<>();
 }

@@ -6,10 +6,10 @@ import lombok.Data;
 
 
 @Data
-@Setter
 public class AbstractEntity {
     @Id
     private String id;
-    protected String name;
+    private String name;
+
 
 }

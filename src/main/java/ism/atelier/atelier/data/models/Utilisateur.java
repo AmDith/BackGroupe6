@@ -16,5 +16,6 @@ public class Utilisateur extends Personne{
     private String roleId;
     private List<String> pointageIds = new ArrayList<>();
     private Etudiant etudiant;
+    private Vigile vigile;
     private Professeur professeur;
 }

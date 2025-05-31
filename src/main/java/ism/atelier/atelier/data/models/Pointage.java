@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Document(collection = "pointage")
 @Data
@@ -13,8 +14,8 @@ public class Pointage {
     @Id
     private String id;
     private LocalDate date;
-    private Integer HeureDb;
-    private Integer HeureFin;
+    private LocalTime HeureDb;
+    private LocalTime HeureFin;
     private Pointer pointer;
 
 

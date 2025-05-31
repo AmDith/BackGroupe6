@@ -13,6 +13,5 @@ public interface JustificationService {
     Justification getJustificationById(String id);
     Justification getJustificationsByEtudiant(String etudiantId);
     List<Justification> getAllJustifications();
-    void supprimerJustification(String id);
     Justification save(Justification justification);
 }
