@@ -49,8 +49,9 @@ public class JustificationMobileControllerImpl implements JustificationMobileCon
 
         absence.setJustificationId(justification.getId());
         absenceService.save(absence);
-
-        return ResponseEntity.ok("Justification envoyer avec succes avec succès");
+//        return ResponseEntity.status(HttpStatus.ACCEPTED)
+//                .body("Justification envoyée avec succès");
+        return ResponseEntity.ok("Justification envoyer avec succès");
     }
 
 //    @Override

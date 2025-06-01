@@ -1,5 +1,6 @@
 package ism.atelier.atelier.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import ism.atelier.atelier.data.models.Absence;
 import ism.atelier.atelier.mobile.dto.response.ValidationJustificationDto;
 import ism.atelier.atelier.services.AbsenceService;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name="JustificationController", description = "Envoi d une justification")
 public class JustificationWebControllerImpl implements JustificationWebController {
     private final AbsenceService absenceService;
     private final JustificationService justificationService;
