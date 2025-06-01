@@ -18,6 +18,7 @@ public class Pointage {
     private LocalTime HeureDb;
     private LocalTime HeureFin;
     private Pointer pointer;
+    private String absenceId;
 
 
     private String utilisateur;

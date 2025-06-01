@@ -21,6 +21,20 @@ public class RestResponseSecurity {
         return response;
     }
 
+    public static Map<String, Object> response2(
+            HttpStatus status,
+            Object data1,
+            Object data2,
+            String type
+    ) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", status.value());
+        response.put("content1", data1);
+        response.put("content2", data2);
+        response.put("type", type);
+        return response;
+    }
+
     public static Map<String, Object> responseError(
             BindingResult bindingResult
     ){

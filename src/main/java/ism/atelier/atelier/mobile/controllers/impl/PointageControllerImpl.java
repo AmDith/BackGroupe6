@@ -1,6 +1,7 @@
 package ism.atelier.atelier.mobile.controllers.impl;
 
 import ism.atelier.atelier.data.enums.Pointer;
+import ism.atelier.atelier.data.models.Absence;
 import ism.atelier.atelier.data.models.Classe;
 import ism.atelier.atelier.data.models.Pointage;
 import ism.atelier.atelier.mobile.controllers.PointageController;
@@ -30,6 +31,8 @@ public class PointageControllerImpl implements PointageController {
     private final CoursService coursService;
     private final SeanceCoursService seanceCoursService;
     private final ClasseService classeService;
+    private final AbsenceService absenceService;
+
 
     @Override
     public ResponseEntity<?> pointageEtudiant(EtudiantScanDto etudiantScanDto, BindingResult bindingResult) {
@@ -42,6 +45,7 @@ public class PointageControllerImpl implements PointageController {
         }
 
         var etudiant = etudiantService.findByMatricule(etudiantScanDto.getMatriculeE());
+        System.out.println(etudiant);
         if (etudiant == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Étudiant introuvable");
         }
@@ -50,15 +54,22 @@ public class PointageControllerImpl implements PointageController {
         LocalTime nowTime = LocalTime.now();
 
         var cours = coursService.getCoursActifDeLaClasse(etudiant.getClasseId());
+        System.out.println(cours);
+        if (cours == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Aucun cours actif trouvé pour la classe de l'étudiant.");
+        }
+
         var seanceCours = seanceCoursService.getSeanceActuelleDuCours(cours);
+        System.out.println(seanceCours);
         if (seanceCours == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucune séance en cours");
         }
 
         Duration dureeSeance = Duration.between(seanceCours.getHeureDb(), seanceCours.getHeureFin());
 
-        LocalTime debutIntervalle1 = seanceCours.getHeureDb().plusMinutes(90);
-        LocalTime finIntervalle1 = seanceCours.getHeureDb().plusMinutes(120);
+        LocalTime debutIntervalle1 = seanceCours.getHeureDb();
+        LocalTime finIntervalle1 = seanceCours.getHeureDb().plusMinutes(30);
         LocalTime debutIntervalle2 = seanceCours.getHeureDb().plusMinutes(210);
         LocalTime finIntervalle2 = seanceCours.getHeureFin();
 
@@ -95,15 +106,23 @@ public class PointageControllerImpl implements PointageController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("⚠️ Vous avez déjà pointé dans cet intervalle.");
         }
 
-        Optional<Pointage> pointageSlot = pointages.stream()
-                .filter(p -> p.getEtudiant() == null || p.getEtudiant().trim().isEmpty())
+        Optional<Pointage> pointageOpt = pointagesEtudiant.stream()
+                .filter(p -> p.getHeurePointage() == null)
+                .filter(p -> {
+                    if (estDansIntervalle1) {
+                        return p.getHeureDb() == null || p.getHeureDb().equals(debutIntervalle1);
+                    } else if (estDansIntervalle2) {
+                        return p.getHeureDb() == null || p.getHeureDb().equals(debutIntervalle2);
+                    }
+                    return false;
+                })
                 .findFirst();
 
-        if (pointageSlot.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucun slot de pointage disponible.");
+        if (pointageOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucun pointage prévu pour cet intervalle.");
         }
 
-        Pointage pointage = pointageSlot.get();
+        Pointage pointage = pointageOpt.get();
         pointage.setEtudiant(etudiant.getId());
         pointage.setUtilisateur(etudiantScanDto.getUtilisateurId());
         pointage.setHeurePointage(nowTime);
@@ -117,13 +136,25 @@ public class PointageControllerImpl implements PointageController {
             pointage.setHeureFin(finIntervalle2);
             if (aPointeIntervalle1) {
                 pointage.setPointer(Pointer.Present);
-            } else {
-                pointage.setPointer(Pointer.Retard);
             }
+//            else {
+//                pointage.setPointer(Pointer.Retard);
+//            }
         }
         pointageService.save(pointage);
 
-            String nomClasse = null;
+        pointagesEtudiant.stream()
+                .filter(p -> p.getPointer() == Pointer.Abscent)
+                .forEach(p -> {
+                    Absence absence = new Absence();
+                    absence.setJustificationId(null);
+                    Absence savedAbsence = absenceService.save(absence);
+                    p.setAbsenceId(savedAbsence.getId());
+                    pointageService.save(p);
+                });
+
+
+        String nomClasse = null;
             if (etudiant.getClasseId() != null) {
                 Classe classe = classeService.getClasse(etudiant.getClasseId());
                 if (classe != null) {

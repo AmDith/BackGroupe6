@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-//@Order(11)
-//@Component
+@Order(11)
+@Component
 @RequiredArgsConstructor
 public class SeanceCoursMock implements CommandLineRunner {
     private final SeanceCoursRepository seanceCoursRepository;
@@ -44,12 +44,13 @@ public class SeanceCoursMock implements CommandLineRunner {
 
             SeanceCours seanceCours3 = new SeanceCours();
             seanceCours3.setId("3");
-            seanceCours3.setDate(LocalDate.parse("2025-05-31"));
-            seanceCours3.setHeureDb(LocalTime.of(10, 20));
-            seanceCours3.setHeureFin(LocalTime.of(12, 20));
+            seanceCours3.setDate(LocalDate.parse("2025-06-01"));
+            seanceCours3.setHeureDb(LocalTime.of(2, 20));
+            seanceCours3.setHeureFin(LocalTime.of(4, 20));
             seanceCours3.setNow(false);
-            seanceCours3.setCoursId("2");
+            seanceCours3.setCoursId("3");
             seanceCours.add(seanceCours3);
+
 
         }
         seanceCoursRepository.saveAll(seanceCours);

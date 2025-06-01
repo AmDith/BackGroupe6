@@ -10,8 +10,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-//@Order(6)
-//@Component
+@Order(6)
+@Component
 @RequiredArgsConstructor
 public class CoursMock implements CommandLineRunner {
     private final CoursRepository coursRepository;

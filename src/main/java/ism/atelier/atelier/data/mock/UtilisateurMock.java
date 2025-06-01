@@ -9,8 +9,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-//@Order(9)
-//@Component
+@Order(9)
+@Component
 @RequiredArgsConstructor
 public class UtilisateurMock implements CommandLineRunner {
     private final UtilisateurRepository utilisateurRepository;
@@ -116,7 +116,7 @@ public class UtilisateurMock implements CommandLineRunner {
             utilisateurs.add(et5);
 
             Utilisateur admin = new Utilisateur();
-            admin.setId("7");
+            admin.setId("9");
             admin.setNomComple("Amour");
             admin.setTel("+221780000008");
             admin.setLogin("amour");

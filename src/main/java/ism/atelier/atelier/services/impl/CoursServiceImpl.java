@@ -32,29 +32,43 @@ public class CoursServiceImpl implements CoursService {
     @Override
     public void updateActivationDesCoursParHeureActuelle() {
         LocalTime heureActuelle = LocalTime.now();
-
         List<SeanceCours> seancesDuJour = seanceCoursRepository.findByDate(LocalDate.now());
+        System.out.println(seancesDuJour);
 
         for (SeanceCours seance : seancesDuJour) {
             Optional<Cours> coursOpt = coursRepository.findById(seance.getCoursId());
             if (coursOpt.isPresent()) {
                 Cours cours = coursOpt.get();
+                System.out.println(cours);
+
+                if (seance.getHeureDb() == null || seance.getHeureFin() == null) {
+                    System.out.println("⚠️ HeureDb ou HeureFin null pour la séance : " + seance.getId());
+                    continue;
+                }
+
                 if (!heureActuelle.isBefore(seance.getHeureDb()) && heureActuelle.isBefore(seance.getHeureFin())) {
-                    if (!cours.isActif()){
+                    // Cours en cours
+                    if (!cours.isActif()) {
                         cours.setActif(true);
+                        System.out.println("✅ Cours activé : " + cours.getId());
                     }
                     seance.setNow(true);
                 } else {
                     LocalTime heureFinAvecDelai = seance.getHeureFin().plusMinutes(5);
                     if (heureActuelle.isAfter(heureFinAvecDelai)) {
+                        // Cours terminé
                         cours.setActif(false);
+                        seance.setNow(false);
+                        System.out.println("🛑 Cours désactivé : " + cours.getId());
                     }
                 }
+
                 coursRepository.save(cours);
                 seanceCoursRepository.save(seance);
             }
         }
     }
+
 
     @Override
     public Cours getCoursActifDeLaClasse(String classeId) {
@@ -67,7 +81,7 @@ public class CoursServiceImpl implements CoursService {
                 .map(Optional::get)
                 .filter(Cours::isActif)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Aucun cours actif trouvé pour cette classe."));
+                .orElse(null);
     }
 
 

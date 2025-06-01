@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Data
@@ -12,5 +13,6 @@ public class EtudiantResponseDto {
     private String matriculeE;
     private String nomComplet;
     private String nomClasse;
-    private String nomRole;
+    private String roleId;
+    private List<AbsenceListSecurityDto> absenceListerDtoIds;
 }

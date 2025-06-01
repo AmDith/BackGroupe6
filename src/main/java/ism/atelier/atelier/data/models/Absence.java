@@ -11,5 +11,4 @@ public class Absence {
     @Id
     private String id;
     private String  justificationId;
-    private String pointageId;
 }

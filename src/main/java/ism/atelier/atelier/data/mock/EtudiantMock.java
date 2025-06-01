@@ -9,8 +9,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-//@Order(8)
-//@Component
+@Order(8)
+@Component
 @RequiredArgsConstructor
 public class EtudiantMock implements CommandLineRunner {
     private final EtudiantRepository etudiantRepository;
@@ -52,7 +52,7 @@ public class EtudiantMock implements CommandLineRunner {
             et4.setMatriculeE("ISM333447");
             et4.setMensualite(Mensualite.AJOUR);
             et4.setClasseId("2");
-            et4.getPointageIds().add("3");
+            et4.getPointageIds().add(null);
             etudiants.add(et4);
 
             Etudiant et5 = new Etudiant();
@@ -61,7 +61,7 @@ public class EtudiantMock implements CommandLineRunner {
             et5.setMatriculeE("ISM333448");
             et5.setMensualite(Mensualite.PASAJOUR);
             et5.setClasseId("2");
-            et5.getPointageIds().add(null);
+            et5.getPointageIds().add("3");
             etudiants.add(et5);
         }
         etudiantRepository.saveAll(etudiants);

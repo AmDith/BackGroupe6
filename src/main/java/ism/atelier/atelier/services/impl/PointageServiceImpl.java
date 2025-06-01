@@ -30,8 +30,8 @@ public class PointageServiceImpl implements PointageService {
 
 
 
-    @PostConstruct
-    public void initialiserPointagesDuJour() {
+    @Scheduled(initialDelay = 2 * 60 * 1000, fixedDelay = Long.MAX_VALUE)
+    public void initialiserPointagesDuJourAvecDelai() {
         genererListeDePointagesDuJour();
     }
 
@@ -40,6 +40,8 @@ public class PointageServiceImpl implements PointageService {
     public void genererListeDePointagesDuJour() {
         LocalDate today = LocalDate.now();
         List<SeanceCours> seancesDuJour = seanceCoursRepository.findByDate(today);
+        System.out.println("🧪 Vérif séances du " + today);
+        seancesDuJour.forEach(seance -> System.out.println("👉 Séance: " + seance.getId() + " [" + seance.getHeureDb() + " - " + seance.getHeureFin() + "]"));
         if (seancesDuJour.isEmpty()) {
             System.out.println("❌ Aucune séance aujourd'hui.");
             return;
@@ -52,10 +54,12 @@ public class PointageServiceImpl implements PointageService {
             if (coursOpt.isEmpty()) continue;
 
             Cours cours = coursOpt.get();
+            System.out.println(cours);
             Optional<Classe> classeOpt = classeRepository.findById(cours.getClasseId());
             if (classeOpt.isEmpty()) continue;
 
             Classe classe = classeOpt.get();
+            System.out.println(classe);
             Duration dureeSeance = Duration.between(seance.getHeureDb(), seance.getHeureFin());
             pointages = remplirPointagesPourEtudiantsDIF(classe, seance, dureeSeance, today, pointages);
             seanceCoursRepository.save(seance);
@@ -69,10 +73,13 @@ public class PointageServiceImpl implements PointageService {
             Optional<Etudiant> etudiantOpt = etudiantRepository.findById(etudiantId);
             if (etudiantOpt.isEmpty()) continue;
             Etudiant etudiant = etudiantOpt.get();
+            System.out.println(etudiant);
             if (dureeSeance.toHours() > 2){
                 Pointage pointageCoursPlus2h = new Pointage();
                 pointageCoursPlus2h = remplissagePointage(pointageCoursPlus2h, seance, today, etudiantId);
                 pointages.add(pointageCoursPlus2h);
+                seance.getPointageIds().add(pointageCoursPlus2h.getId());
+                etudiant.getPointageIds().add(pointageCoursPlus2h.getId());
             }
             Pointage pointage = new Pointage();
             pointage = remplissagePointage(pointage, seance, today, etudiantId);
@@ -110,36 +117,41 @@ public class PointageServiceImpl implements PointageService {
         return pointageRepository.save(pointage);
     }
 
-    @Scheduled(cron = "0 * * * * *") // Toutes les minutes
-    public void verifierEtGenererAbsences() {
-        LocalDate today = LocalDate.now();
-        LocalTime now = LocalTime.now();
-
-        List<SeanceCours> seances = seanceCoursRepository.findByDate(today);
-        for (SeanceCours seance : seances) {
-            // Une fois 1 minute après HeureFin pour les séances actives
-            if (seance.isNow() && now.isAfter(seance.getHeureFin().plusMinutes(1))) {
-                for (String pointageId : seance.getPointageIds()) {
-                    pointageRepository.findById(pointageId).ifPresent(p -> {
-                        if (p.getPointer() == Pointer.Abscent) {
-                            Optional<Absence> existingAbs = absenceRepository.findByPointageId(p.getId());
-                            if (existingAbs.isEmpty()) {
-                                Absence absence = new Absence();
-                                absence.setPointageId(p.getId());
-                                absence.setJustificationId(null);
-                                absenceRepository.save(absence);
-                                System.out.println("Absence créée pour pointage : " + p.getId());
-                            }
-                        }
-                    });
-                }
-
-                // Désactiver la séance pour éviter recréation multiple
-                seance.setNow(false);
-                seanceCoursRepository.save(seance);
-            }
-        }
+    @Override
+    public Pointage getById(String id) {
+        return pointageRepository.findById(id).orElse(null);
     }
+
+//    @Scheduled(cron = "0 * * * * *") // Toutes les minutes
+//    public void verifierEtGenererAbsences() {
+//        LocalDate today = LocalDate.now();
+//        LocalTime now = LocalTime.now();
+//
+//        List<SeanceCours> seances = seanceCoursRepository.findByDate(today);
+//        for (SeanceCours seance : seances) {
+//            // Une fois 1 minute après HeureFin pour les séances actives
+//            if (seance.isNow() && now.isAfter(seance.getHeureFin().plusMinutes(1))) {
+//                for (String pointageId : seance.getPointageIds()) {
+//                    pointageRepository.findById(pointageId).ifPresent(p -> {
+//                        if (p.getPointer() == Pointer.Abscent) {
+//                            Optional<Absence> existingAbs = absenceRepository.findByPointageId(p.getId());
+//                            if (existingAbs.isEmpty()) {
+//                                Absence absence = new Absence();
+//                                absence.setPointageId(p.getId());
+//                                absence.setJustificationId(null);
+//                                absenceRepository.save(absence);
+//                                System.out.println("Absence créée pour pointage : " + p.getId());
+//                            }
+//                        }
+//                    });
+//                }
+//
+//                // Désactiver la séance pour éviter recréation multiple
+//                seance.setNow(false);
+//                seanceCoursRepository.save(seance);
+//            }
+//        }
+//    }
 
 
 
