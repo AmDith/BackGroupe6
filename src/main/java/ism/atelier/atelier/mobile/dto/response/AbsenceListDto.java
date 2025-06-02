@@ -1,6 +1,5 @@
-package ism.atelier.atelier.security.dto.response;
+package ism.atelier.atelier.mobile.dto.response;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class AbsenceListSecurityDto {
+public class AbsenceListDto {
     private String id;
     private LocalDate date;
     private String HeureDb;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/api/pointage")
+@RequestMapping("/api/mobile/pointage")
 public interface PointageController {
     @PostMapping("/pointer")
     public ResponseEntity<?> pointageEtudiant(@RequestBody EtudiantScanDto etudiantScanDto, BindingResult bindingResult);

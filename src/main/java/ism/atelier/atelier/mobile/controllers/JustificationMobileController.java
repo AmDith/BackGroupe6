@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/api/justification")
+@RequestMapping("/api/mobile/justification")
 public interface JustificationMobileController {
     @PostMapping("/justificatifAbsent")
     public ResponseEntity<?> justificatif(@Valid @RequestBody JustificationAbsentDto justificationDto, BindingResult bindingResult);

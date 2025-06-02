@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class ValiderJustificationDto {
-    private Long justificationId;
+    private String justificationId;
     private String enumJustification;
 }

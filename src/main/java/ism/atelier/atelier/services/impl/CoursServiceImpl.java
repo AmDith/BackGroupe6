@@ -62,7 +62,6 @@ public class CoursServiceImpl implements CoursService {
                         System.out.println("🛑 Cours désactivé : " + cours.getId());
                     }
                 }
-
                 coursRepository.save(cours);
                 seanceCoursRepository.save(seance);
             }
@@ -82,6 +81,11 @@ public class CoursServiceImpl implements CoursService {
                 .filter(Cours::isActif)
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public Cours findById(String coursId) {
+        return coursRepository.findById(coursId).orElse(null);
     }
 
 

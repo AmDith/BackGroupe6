@@ -28,4 +28,9 @@ public class SeanceCoursServiceImpl implements SeanceCoursService {
 
         throw new RuntimeException("Aucune séance en cours trouvée pour ce cours.");
     }
+
+    @Override
+    public SeanceCours findById(String seanceCoursId) {
+        return seanceCoursRepository.findById(seanceCoursId).orElse(null);
+    }
 }

@@ -9,4 +9,5 @@ public class UtilisateurResponseDto {
     private String id;
     private String nomUtilisateur;
     private String nomRole;
+    private String image;
 }

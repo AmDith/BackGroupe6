@@ -8,10 +8,12 @@ import java.time.LocalDate;
 @Builder
 @Data
 public class AbsenceListWebDto {
-    private Long id;
+    private String id;
     private LocalDate date;
     private String nomEtudiant;
     private String nomModule;
     private String matricule;
     private String nomClasse;
+    private String image;
+    private String etatAbsene;
 }

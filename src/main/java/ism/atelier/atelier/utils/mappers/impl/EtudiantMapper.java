@@ -12,10 +12,10 @@ public class EtudiantMapper {
         String heureScan = LocalTime.now().format(DateTimeFormatter.ofPattern("HH'H'mm"));
 
         return QRcodeEtudiantDto.builder()
-                .date(heureScan)
+                .heure(heureScan)
                 .nomComplet(etudiant.getNomComple())
                 .nomClasse(nomClasse)
-                .mensualate(etudiant.getMensualite())
+                .mensualite(etudiant.getMensualite())
                 .build();
     }
 }

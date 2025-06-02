@@ -24,7 +24,7 @@ public class EtudiantMock implements CommandLineRunner {
             et1.setMatriculeE("ISM333444");
             et1.setMensualite(Mensualite.AJOUR);
             et1.setClasseId("1");
-            et1.getPointageIds().add(null);
+//            et1.getPointageIds().add(null);
             etudiants.add(et1);
 
             Etudiant et2 = new Etudiant();
@@ -33,7 +33,7 @@ public class EtudiantMock implements CommandLineRunner {
             et2.setMatriculeE("ISM333445");
             et2.setMensualite(Mensualite.PASAJOUR);
             et2.setClasseId("1");
-            et2.getPointageIds().add(null);
+//            et2.getPointageIds().add(null);
             etudiants.add(et2);
 
             Etudiant et3 = new Etudiant();
@@ -42,8 +42,8 @@ public class EtudiantMock implements CommandLineRunner {
             et3.setMatriculeE("ISM333446");
             et3.setMensualite(Mensualite.AJOUR);
             et3.setClasseId("1");
-            et3.getPointageIds().add("1");
-            et3.getPointageIds().add("2");
+//            et3.getPointageIds().add("1");
+//            et3.getPointageIds().add("2");
             etudiants.add(et3);
 
             Etudiant et4 = new Etudiant();
@@ -52,7 +52,7 @@ public class EtudiantMock implements CommandLineRunner {
             et4.setMatriculeE("ISM333447");
             et4.setMensualite(Mensualite.AJOUR);
             et4.setClasseId("2");
-            et4.getPointageIds().add(null);
+//            et4.getPointageIds().add(null);
             etudiants.add(et4);
 
             Etudiant et5 = new Etudiant();
@@ -61,7 +61,7 @@ public class EtudiantMock implements CommandLineRunner {
             et5.setMatriculeE("ISM333448");
             et5.setMensualite(Mensualite.PASAJOUR);
             et5.setClasseId("2");
-            et5.getPointageIds().add("3");
+//            et5.getPointageIds().add("3");
             etudiants.add(et5);
         }
         etudiantRepository.saveAll(etudiants);

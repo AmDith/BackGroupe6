@@ -7,11 +7,10 @@ import lombok.Data;
 @Data
 @Builder
 public class JustificationAbsentDto {
-    private Long pointageId;
+    private String absenceId;
     @NotNull(message = "Le motif est obligatoire")
     private String motifs;
     @NotNull(message = "Le titre est obligatoire")
     private String titre;
-    @NotNull(message = "Le piece jointe est obligatoire")
     private String pieceJointe;
 }

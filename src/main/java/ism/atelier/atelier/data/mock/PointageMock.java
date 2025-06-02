@@ -43,7 +43,7 @@ public class PointageMock implements CommandLineRunner {
             pointage2.setUtilisateur("2");
             pointage2.setEtudiant("3");
             pointage2.setSeanceCours("1");
-            pointage2.setAbsenceId(null);
+            pointage2.setAbsenceId("2");
             pointages.add(pointage2);
 
             Pointage pointage3 = new Pointage();

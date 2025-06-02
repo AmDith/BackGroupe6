@@ -23,33 +23,24 @@ public class SeanceCoursMock implements CommandLineRunner {
         if (seanceCours.isEmpty()) {
             SeanceCours seanceCours1 = new SeanceCours();
             seanceCours1.setId("1");
-            seanceCours1.setDate(LocalDate.parse("2025-06-01"));
-            seanceCours1.setHeureDb(LocalTime.of(8, 0));     // 8h00
-            seanceCours1.setHeureFin(LocalTime.of(12, 0));   // 12h00
+            seanceCours1.setDate(LocalDate.parse("2025-06-02"));
+            seanceCours1.setHeureDb(LocalTime.of(16, 35));     // 8h00
+            seanceCours1.setHeureFin(LocalTime.of(16, 55));   // 12h00
             seanceCours1.setNow(false);
             seanceCours1.setCoursId("1");
-            seanceCours1.getPointageIds().add("1");
-            seanceCours1.getPointageIds().add("2");
+//            seanceCours1.getPointageIds().add("1");
+//            seanceCours1.getPointageIds().add("2");
             seanceCours.add(seanceCours1);
 
-            SeanceCours seanceCours2 = new SeanceCours();
-            seanceCours2.setId("2");
-            seanceCours2.setDate(LocalDate.parse("2025-06-01"));
-            seanceCours2.setHeureDb(LocalTime.of(13, 0));
-            seanceCours2.setHeureFin(LocalTime.of(15, 0));
-            seanceCours2.setNow(false);
-            seanceCours2.setCoursId("2");
-            seanceCours2.getPointageIds().add("3");
-            seanceCours.add(seanceCours2);
-
-            SeanceCours seanceCours3 = new SeanceCours();
-            seanceCours3.setId("3");
-            seanceCours3.setDate(LocalDate.parse("2025-06-01"));
-            seanceCours3.setHeureDb(LocalTime.of(2, 20));
-            seanceCours3.setHeureFin(LocalTime.of(4, 20));
-            seanceCours3.setNow(false);
-            seanceCours3.setCoursId("3");
-            seanceCours.add(seanceCours3);
+//            SeanceCours seanceCours2 = new SeanceCours();
+//            seanceCours2.setId("2");
+//            seanceCours2.setDate(LocalDate.parse("2025-06-02"));
+//            seanceCours2.setHeureDb(LocalTime.of(16, 27));
+//            seanceCours2.setHeureFin(LocalTime.of(16, 57));
+//            seanceCours2.setNow(false);
+//            seanceCours2.setCoursId("1");
+////            seanceCours2.getPointageIds().add("3");
+//            seanceCours.add(seanceCours2);
 
 
         }

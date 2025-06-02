@@ -1,7 +1,6 @@
 package ism.atelier.atelier.mobile.controllers.impl;
 
 import ism.atelier.atelier.data.enums.Pointer;
-import ism.atelier.atelier.data.models.Absence;
 import ism.atelier.atelier.data.models.Classe;
 import ism.atelier.atelier.data.models.Pointage;
 import ism.atelier.atelier.mobile.controllers.PointageController;
@@ -44,7 +43,7 @@ public class PointageControllerImpl implements PointageController {
             return ResponseEntity.badRequest().body(errors);
         }
 
-        var etudiant = etudiantService.findByMatricule(etudiantScanDto.getMatriculeE());
+        var etudiant = etudiantService.findByMatricule(etudiantScanDto.getQRmatricule());
         System.out.println(etudiant);
         if (etudiant == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Étudiant introuvable");
@@ -52,7 +51,7 @@ public class PointageControllerImpl implements PointageController {
 
 
         LocalTime nowTime = LocalTime.now();
-
+        System.out.println(etudiant.getClasseId());
         var cours = coursService.getCoursActifDeLaClasse(etudiant.getClasseId());
         System.out.println(cours);
         if (cours == null) {
@@ -143,15 +142,6 @@ public class PointageControllerImpl implements PointageController {
         }
         pointageService.save(pointage);
 
-        pointagesEtudiant.stream()
-                .filter(p -> p.getPointer() == Pointer.Abscent)
-                .forEach(p -> {
-                    Absence absence = new Absence();
-                    absence.setJustificationId(null);
-                    Absence savedAbsence = absenceService.save(absence);
-                    p.setAbsenceId(savedAbsence.getId());
-                    pointageService.save(p);
-                });
 
 
         String nomClasse = null;

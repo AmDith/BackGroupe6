@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PointageRepository extends MongoRepository<Pointage, String> {
     List<Pointage> findBySeanceCours(String seanceCoursId);
+    boolean existsByEtudiantAndSeanceCours(String etudiant, String seanceCours);
+
 }

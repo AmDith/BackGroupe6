@@ -26,7 +26,14 @@ public class AbsenceMock implements CommandLineRunner {
             Absence absence = new Absence();
             absence.setId("1");
             absence.setJustificationId(null);
+            absence.setPointageId("3");
             absences.add(absence);
+
+            Absence absence2 = new Absence();
+            absence2.setId("2");
+            absence2.setJustificationId(null);
+            absence2.setPointageId("2");
+            absences.add(absence2);
 
         }
         absenceRepository.saveAll(absences);

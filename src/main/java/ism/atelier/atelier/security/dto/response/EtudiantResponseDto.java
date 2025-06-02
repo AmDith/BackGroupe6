@@ -14,5 +14,5 @@ public class EtudiantResponseDto {
     private String nomComplet;
     private String nomClasse;
     private String roleId;
-    private List<AbsenceListSecurityDto> absenceListerDtoIds;
+    private String image;
 }

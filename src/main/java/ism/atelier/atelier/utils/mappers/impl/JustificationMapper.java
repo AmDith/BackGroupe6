@@ -1,4 +1,26 @@
 package ism.atelier.atelier.utils.mappers.impl;
 
-public class JustificationMapper {
+import ism.atelier.atelier.data.models.*;
+import ism.atelier.atelier.data.models.Module;
+import ism.atelier.atelier.web.dto.response.JustificationWebDto;
+
+public class JustificationMapper  {
+    public static JustificationWebDto toWebDto(
+            Etudiant etudiant,
+            SeanceCours seance,
+            Module module,
+            Classe classe,
+            Justification justification
+    ) {
+        return JustificationWebDto.builder()
+                .id(justification.getId())
+                .date(seance.getDate())
+                .nomEtudiant(etudiant.getNomComple())
+                .matricule(etudiant.getMatriculeE())
+                .nomClasse(classe.getName())
+                .nomModule(module.getName())
+                .image("default.jpg")
+                .statutJustification(justification.getEnumJustification())
+                .build();
+    }
 }

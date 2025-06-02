@@ -26,7 +26,7 @@ public class ClasseMock implements CommandLineRunner {
             classe1.setName("L3GLRS");
             classe1.setFiliereId("1");
             classe1.setNiveauId("3");
-            classe1.getCoursIds().add("3");
+            classe1.getCoursIds().add("1");
             classe1.getEtudiantIds().add("1");
             classe1.getEtudiantIds().add("2");
             classe1.getEtudiantIds().add("3");

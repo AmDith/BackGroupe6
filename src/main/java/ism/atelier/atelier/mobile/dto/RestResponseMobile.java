@@ -1,5 +1,6 @@
 package ism.atelier.atelier.mobile.dto;
 
+import ism.atelier.atelier.mobile.dto.response.AbsenceListDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -12,6 +13,18 @@ public class RestResponseMobile {
     public static Map<String, Object> response(
             HttpStatus status,
             Object data,
+            String type
+    ) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", status.value());
+        response.put("content", data);
+        response.put("type", type);
+        return response;
+    }
+
+    public static Map<String, Object> response2(
+            HttpStatus status,
+            List<AbsenceListDto> data,
             String type
     ) {
         Map<String, Object> response = new HashMap<>();

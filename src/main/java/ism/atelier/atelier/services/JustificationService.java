@@ -7,5 +7,9 @@ import java.util.List;
 
 public interface JustificationService {
     List<Justification> listerJustification();
-    Justification valider(Justification justification);
+    Justification valider(String id, String statut);
+    Justification getJustificationById(String id);
+    Justification save(Justification justification);
+    List<Justification> findAll();
+    Justification findById(String id);
 }

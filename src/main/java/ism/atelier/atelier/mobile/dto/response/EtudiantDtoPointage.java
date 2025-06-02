@@ -6,9 +6,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class QRcodeEtudiantDto {
+public class EtudiantDtoPointage {
     private String heure;
     private String nomComplet;
     private String nomClasse;
-    private Mensualite mensualite;
 }

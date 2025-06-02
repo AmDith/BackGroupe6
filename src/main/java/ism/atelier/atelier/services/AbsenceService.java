@@ -7,4 +7,8 @@ import java.util.List;
 public interface AbsenceService {
     List<Absence> listerToutPointageAbscent();
     Absence save(Absence absence);
+    Absence findById(String absenceId);
+    List<Absence> findAll();
+    List<Absence> getAllAsenceJustifier();
+    Absence getAbsence(String id);
 }

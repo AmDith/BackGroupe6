@@ -1,13 +1,11 @@
 package ism.atelier.atelier.security.controllers.impl;
 
 import ism.atelier.atelier.data.models.*;
-import ism.atelier.atelier.data.repository.AbsenceRepository;
-import ism.atelier.atelier.data.repository.CoursRepository;
-import ism.atelier.atelier.data.repository.ModuleRepository;
-import ism.atelier.atelier.data.repository.SeanceCoursRepository;
 import ism.atelier.atelier.security.controllers.UtilisateurSecurityController;
 import ism.atelier.atelier.security.dto.RestResponseSecurity;
 import ism.atelier.atelier.security.dto.request.UtilisateurConneteDto;
+import ism.atelier.atelier.security.dto.response.EtudiantResponseDto;
+import ism.atelier.atelier.security.dto.response.UtilisateurResponseDto;
 import ism.atelier.atelier.services.*;
 import ism.atelier.atelier.utils.mappers.impl.UtilisateurMapper;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +26,6 @@ public class UtilisateurControllerImpl implements UtilisateurSecurityController 
     private final RoleService roleService;
     private final EtudiantService etudiantService;
     private final PointageService pointageService;
-    private final AbsenceRepository absenceRepository;
-    private final SeanceCoursRepository seanceCoursRepository;
-    private final CoursRepository coursRepository;
-    private final ModuleRepository moduleRepository;
 
     @Override
     public ResponseEntity<?> connexion(UtilisateurConneteDto user, BindingResult bindingResult) {
@@ -47,7 +41,7 @@ public class UtilisateurControllerImpl implements UtilisateurSecurityController 
             Utilisateur utilisateur = utilisateurService.seConnecter(UtilisateurMapper.toEntity(user));
             Role role = roleService.findById(utilisateur.getRoleId());
 
-            // 👨‍🎓 Si c'est un étudiant
+            // Si c'est un étudiant
             if (utilisateur.getEtudiantId() != null) {
                 Etudiant etudiant = etudiantService.findById(utilisateur.getEtudiantId());
                 String nomClasse = null;
@@ -61,7 +55,6 @@ public class UtilisateurControllerImpl implements UtilisateurSecurityController 
                     }
                 }
 
-
                 if (etudiant != null && etudiant.getClasseId() != null) {
                     Classe classe = classeService.getClasse(etudiant.getClasseId());
                     if (classe != null) {
@@ -69,26 +62,17 @@ public class UtilisateurControllerImpl implements UtilisateurSecurityController 
                     }
                 }
 
-                var etudiantResponseDto = UtilisateurMapper.toEtudiantResponseDto(
-                        utilisateur,
-                        etudiant,
-                        nomClasse,
-                        pointages,
-                        absenceRepository,
-                        seanceCoursRepository,
-                        coursRepository,
-                        moduleRepository
-                );
+                EtudiantResponseDto etudiantDto = UtilisateurMapper.toEtudiantResponseDto(utilisateur, etudiant, nomClasse);
                 Map<String, Object> response = RestResponseSecurity.response(
                         HttpStatus.OK,
-                        etudiantResponseDto,
-                        "etudiantResponseDto"
+                        etudiantDto,
+                        "utilisateurResponseDto"
                 );
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
 
-            // 👨‍🏫 Sinon professeur, admin ou vigile
-            var utilisateurResponseDto = UtilisateurMapper.toUtilisateurResponseDto(utilisateur, role);
+            // Professeur, admin ou vigile
+            UtilisateurResponseDto utilisateurResponseDto = UtilisateurMapper.toUtilisateurResponseDto(utilisateur, role);
             Map<String, Object> response = RestResponseSecurity.response(
                     HttpStatus.OK,
                     utilisateurResponseDto,
