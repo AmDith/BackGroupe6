@@ -1,5 +1,6 @@
 package ism.atelier.atelier.utils.mappers.impl;
 
+import ism.atelier.atelier.data.enums.EnumJustification;
 import ism.atelier.atelier.data.models.*;
 import ism.atelier.atelier.data.models.Module;
 import ism.atelier.atelier.web.dto.response.JustificationWebDto;
@@ -20,7 +21,7 @@ public class JustificationMapper  {
                 .nomClasse(classe.getName())
                 .nomModule(module.getName())
                 .image("default.jpg")
-                .statutJustification(justification.getEnumJustification())
+                .statutJustification(justification.getEnumJustification() == EnumJustification.EnCours ? "En Attente" : justification.getEnumJustification().toString())
                 .build();
     }
 }

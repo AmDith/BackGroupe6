@@ -1,10 +1,12 @@
 package ism.atelier.atelier.mobile.controllers.impl;
 
+import ism.atelier.atelier.data.enums.EnumJustification;
 import ism.atelier.atelier.data.models.Absence;
 import ism.atelier.atelier.data.models.Justification;
 import ism.atelier.atelier.mobile.controllers.JustificationMobileController;
 import ism.atelier.atelier.mobile.dto.request.JustificationAbsentDto;
 import ism.atelier.atelier.services.AbsenceService;
+import ism.atelier.atelier.services.FileUploadService;
 import ism.atelier.atelier.services.JustificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -24,10 +27,9 @@ public class JustificationMobileControllerImpl implements JustificationMobileCon
 
     private final JustificationService justificationService;
     private final AbsenceService absenceService;
-
-    @PostMapping("/api/mobile/justification")
+    private final FileUploadService fileUploadService;
     @Override
-    public ResponseEntity<?> justificatif(@RequestBody JustificationAbsentDto justificationDto,
+    public ResponseEntity<?> justificatif(JustificationAbsentDto justificationDto,
                                           BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -43,13 +45,17 @@ public class JustificationMobileControllerImpl implements JustificationMobileCon
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Absence introuvable");
         }
 
+        List<String> urls = fileUploadService.uploadMultipleFiles(justificationDto.getPiecesJointes());
+
         Justification justification = new Justification();
         justification.setTitre(justificationDto.getTitre());
         justification.setMotifs(justificationDto.getMotifs());
-        justification.setPieceJointe(justificationDto.getPieceJointe());
+        justification.setEnumJustification(EnumJustification.EnCours);
+        justification.setPieceJointe(urls);
         justification = justificationService.save(justification);
         absence.setJustificationId(justification.getId());
         absenceService.save(absence);
+
         return ResponseEntity.ok("Justification envoyée avec succès");
     }
 }

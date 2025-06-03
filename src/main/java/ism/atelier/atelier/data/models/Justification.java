@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "justifications")
 @Data
 public class Justification {
@@ -12,6 +14,6 @@ public class Justification {
     private String id;
     private String motifs;
     private String titre;
-    private String pieceJointe;
+    private List<String> pieceJointe;
     private EnumJustification enumJustification;
 }

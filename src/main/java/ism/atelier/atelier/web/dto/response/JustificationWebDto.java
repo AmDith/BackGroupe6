@@ -16,5 +16,5 @@ public class JustificationWebDto {
     private String matricule;
     private String nomClasse;
     private String image;
-    private EnumJustification statutJustification;
+    private String statutJustification;
 }
