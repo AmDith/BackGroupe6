@@ -24,23 +24,23 @@ public class SeanceCoursMock implements CommandLineRunner {
             SeanceCours seanceCours1 = new SeanceCours();
             seanceCours1.setId("1");
             seanceCours1.setDate(LocalDate.parse("2025-06-04"));
-            seanceCours1.setHeureDb(LocalTime.of(0, 0));     // 8h00
-            seanceCours1.setHeureFin(LocalTime.of(0, 15));   // 12h00
+            seanceCours1.setHeureDb(LocalTime.of(10, 5));
+            seanceCours1.setHeureFin(LocalTime.of(10, 20));
             seanceCours1.setNow(false);
             seanceCours1.setCoursId("1");
 //            seanceCours1.getPointageIds().add("1");
 //            seanceCours1.getPointageIds().add("2");
             seanceCours.add(seanceCours1);
 
-//            SeanceCours seanceCours2 = new SeanceCours();
-//            seanceCours2.setId("2");
-//            seanceCours2.setDate(LocalDate.parse("2025-06-02"));
-//            seanceCours2.setHeureDb(LocalTime.of(16, 27));
-//            seanceCours2.setHeureFin(LocalTime.of(16, 57));
-//            seanceCours2.setNow(false);
-//            seanceCours2.setCoursId("1");
+            SeanceCours seanceCours2 = new SeanceCours();
+            seanceCours2.setId("2");
+            seanceCours2.setDate(LocalDate.parse("2025-06-04"));
+            seanceCours2.setHeureDb(LocalTime.of(16, 27));
+            seanceCours2.setHeureFin(LocalTime.of(16, 57));
+            seanceCours2.setNow(false);
+            seanceCours2.setCoursId("1");
 ////            seanceCours2.getPointageIds().add("3");
-//            seanceCours.add(seanceCours2);
+            seanceCours.add(seanceCours2);
 
 
         }

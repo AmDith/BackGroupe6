@@ -30,7 +30,6 @@ public class PointageControllerImpl implements PointageController {
     private final CoursService coursService;
     private final SeanceCoursService seanceCoursService;
     private final ClasseService classeService;
-    private final AbsenceService absenceService;
 
 
     @Override

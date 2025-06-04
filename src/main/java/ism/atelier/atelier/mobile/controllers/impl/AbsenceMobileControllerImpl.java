@@ -40,7 +40,7 @@ public class AbsenceMobileControllerImpl implements AbsenceMobileController {
 
         for (String pointageId : etudiant.getPointageIds()) {
             Pointage pointage = pointageService.getById(pointageId);
-            if (pointage == null || pointage.getPointer() != Pointer.Abscent) continue;
+            if (pointage == null || pointage.getPointer() != Pointer.Absent) continue;
 
             Absence absence = absenceService.findById(pointage.getAbsenceId());
             if (absence == null) continue;

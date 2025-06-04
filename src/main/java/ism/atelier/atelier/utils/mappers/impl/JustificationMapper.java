@@ -20,7 +20,7 @@ public class JustificationMapper  {
                 .matricule(etudiant.getMatriculeE())
                 .nomClasse(classe.getName())
                 .nomModule(module.getName())
-                .image("default.jpg")
+                .image(justification.getPieceJointe())
                 .statutJustification(justification.getEnumJustification() == EnumJustification.EnCours ? "En Attente" : justification.getEnumJustification().toString())
                 .build();
     }

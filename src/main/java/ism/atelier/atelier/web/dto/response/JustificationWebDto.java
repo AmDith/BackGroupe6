@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Data
@@ -15,6 +16,6 @@ public class JustificationWebDto {
     private String nomModule;
     private String matricule;
     private String nomClasse;
-    private String image;
+    private List<String> image;
     private String statutJustification;
 }

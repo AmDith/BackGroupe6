@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-@Order(12)
-@Component
+//@Order(12)
+//@Component
 @RequiredArgsConstructor
 public class PointageMock implements CommandLineRunner {
     private final PointageRepository pointageRepository;
@@ -26,7 +26,7 @@ public class PointageMock implements CommandLineRunner {
             pointage1.setHeurePointage(null);
             pointage1.setHeureDb(LocalTime.of(8, 0));     // 8h00
             pointage1.setHeureFin(LocalTime.of(8, 30));   // 12h00
-            pointage1.setPointer(Pointer.Abscent);
+            pointage1.setPointer(Pointer.Absent);
             pointage1.setUtilisateur("2");
             pointage1.setEtudiant("3");
             pointage1.setSeanceCours("1");
@@ -39,7 +39,7 @@ public class PointageMock implements CommandLineRunner {
             pointage2.setHeurePointage(null);
             pointage2.setHeureDb(LocalTime.of(11, 30));     // 8h00
             pointage2.setHeureFin(LocalTime.of(12, 0));   // 10h00
-            pointage2.setPointer(Pointer.Abscent);
+            pointage2.setPointer(Pointer.Absent);
             pointage2.setUtilisateur("2");
             pointage2.setEtudiant("3");
             pointage2.setSeanceCours("1");
@@ -52,7 +52,7 @@ public class PointageMock implements CommandLineRunner {
             pointage3.setHeurePointage(null);
             pointage3.setHeureDb(LocalTime.of(13, 0));     // 8h00
             pointage3.setHeureFin(LocalTime.of(13, 30));   // 12h00
-            pointage3.setPointer(Pointer.Abscent);
+            pointage3.setPointer(Pointer.Absent);
             pointage3.setUtilisateur("1");
             pointage3.setEtudiant("4");
             pointage3.setSeanceCours("2");

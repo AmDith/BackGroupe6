@@ -99,7 +99,7 @@ public class PointageServiceImpl implements PointageService {
 
     public Pointage remplissagePointage(Pointage pointage, SeanceCours seance, LocalDate today, String etudiantId){
         pointage.setDate(today);
-        pointage.setPointer(Pointer.Abscent);
+        pointage.setPointer(Pointer.Absent);
         pointage.setSeanceCours(seance.getId());
         pointage.setHeureDb(null);
         pointage.setHeureFin(null);
@@ -128,7 +128,7 @@ public class PointageServiceImpl implements PointageService {
         return pointageRepository.findById(id).orElse(null);
     }
 
-    @Scheduled(cron = "0 16 0 * * *")
+    @Scheduled(cron = "0 20 10 * * *")
     public void verifierEtGenererAbsences() {
         System.out.println("⏰ Lancement de la génération d'absences à 18h");
 
@@ -138,7 +138,7 @@ public class PointageServiceImpl implements PointageService {
 
             for (String pointageId : pointageIds) {
                 pointageRepository.findById(pointageId).ifPresent(p -> {
-                    if (p.getPointer() == Pointer.Abscent) {
+                    if (p.getPointer() == Pointer.Absent) {
                         Absence absence = new Absence();
                         absence.setPointageId(p.getId());
                         absence.setJustificationId(null);

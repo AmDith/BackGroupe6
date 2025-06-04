@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Order(13)
-@Component
+//@Order(13)
+//@Component
 @RequiredArgsConstructor
 public class AbsenceMock implements CommandLineRunner {
     private final AbsenceRepository absenceRepository;
