@@ -24,8 +24,8 @@ public class SeanceCoursMock implements CommandLineRunner {
             SeanceCours seanceCours1 = new SeanceCours();
             seanceCours1.setId("1");
             seanceCours1.setDate(LocalDate.parse("2025-06-04"));
-            seanceCours1.setHeureDb(LocalTime.of(10, 5));
-            seanceCours1.setHeureFin(LocalTime.of(10, 20));
+            seanceCours1.setHeureDb(LocalTime.of(13, 7));
+            seanceCours1.setHeureFin(LocalTime.of(13, 20));
             seanceCours1.setNow(false);
             seanceCours1.setCoursId("1");
 //            seanceCours1.getPointageIds().add("1");
