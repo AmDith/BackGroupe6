@@ -11,7 +11,7 @@ import java.util.Map;
 @RequestMapping("/api/justification")
 public interface JustificationWebController {
     @PutMapping("/validation/{justificationId}")
-    public ResponseEntity<?> Validerjustificatif(@Valid @RequestBody ValiderJustificationDto ValidationjustificationDto, BindingResult bindingResult);
+    public ResponseEntity<?> Validerjustificatif(@PathVariable String justificationId,@Valid @RequestBody ValiderJustificationDto validationjustificationDto, BindingResult bindingResult);
     @GetMapping("/listes")
     public ResponseEntity<Map<String, Object>> listerJustification();
 }

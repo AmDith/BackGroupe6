@@ -32,7 +32,7 @@ public class JustificationWebControllerImpl implements JustificationWebControlle
     private final ClasseService classeService;
 
     @Override
-    public ResponseEntity<?> Validerjustificatif(ValiderJustificationDto validationjustificationDto, BindingResult bindingResult) {
+    public ResponseEntity<?> Validerjustificatif(String justificationId, ValiderJustificationDto validationjustificationDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -40,16 +40,25 @@ public class JustificationWebControllerImpl implements JustificationWebControlle
             }
             return ResponseEntity.badRequest().body(errors);
         }
-        var justification = justificationService.findById(validationjustificationDto.getJustificationId());
+
+        var justification = justificationService.findById(justificationId);
         if (justification == null) {
-            return ResponseEntity.badRequest().body("justification non trouvée");
+            return ResponseEntity.status(404).body("Justification non trouvée");
         }
-        justification.setEnumJustification(EnumJustification.valueOf(validationjustificationDto.getEnumJustification()));;
+
+        try {
+            justification.setEnumJustification(EnumJustification.valueOf(
+                    validationjustificationDto.getEnumJustification()
+            ));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Valeur de justification invalide. Options : Valider, Rejeter...");
+        }
+
         justificationService.save(justification);
-        return ResponseEntity.ok("Justification " + validationjustificationDto.getEnumJustification().toLowerCase() + " avec succès");
+
+        return ResponseEntity.ok("Justification " +
+                validationjustificationDto.getEnumJustification().toLowerCase() + " avec succès.");
     }
-
-
 
     @Override
     public ResponseEntity<Map<String, Object>> listerJustification() {

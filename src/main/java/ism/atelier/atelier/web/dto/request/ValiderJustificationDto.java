@@ -1,11 +1,12 @@
 package ism.atelier.atelier.web.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 public class ValiderJustificationDto {
-    private String justificationId;
+    @NotBlank
     private String enumJustification;
 }
