@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Order(1)
-@Component
+//@Order(1)
+//@Component
 @RequiredArgsConstructor
 public class RoleMock implements CommandLineRunner {
     private final RoleRepository roleRepo;

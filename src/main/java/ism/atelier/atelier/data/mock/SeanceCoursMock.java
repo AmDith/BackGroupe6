@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-@Order(11)
-@Component
+//@Order(11)
+//@Component
 @RequiredArgsConstructor
 public class SeanceCoursMock implements CommandLineRunner {
     private final SeanceCoursRepository seanceCoursRepository;

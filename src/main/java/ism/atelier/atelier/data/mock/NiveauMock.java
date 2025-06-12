@@ -9,8 +9,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Order(2)
-@Component
+//@Order(2)
+//@Component
 @RequiredArgsConstructor
 public class NiveauMock implements CommandLineRunner {
     private final NiveauRepository niveauRepository;

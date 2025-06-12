@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Order(9)
-@Component
+//@Order(9)
+//@Component
 @RequiredArgsConstructor
 public class UtilisateurMock implements CommandLineRunner {
 
