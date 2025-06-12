@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-//@Order(11)
-//@Component
+@Order(11)
+@Component
 @RequiredArgsConstructor
 public class SeanceCoursMock implements CommandLineRunner {
     private final SeanceCoursRepository seanceCoursRepository;
@@ -23,9 +23,9 @@ public class SeanceCoursMock implements CommandLineRunner {
         if (seanceCours.isEmpty()) {
             SeanceCours seanceCours1 = new SeanceCours();
             seanceCours1.setId("1");
-            seanceCours1.setDate(LocalDate.parse("2025-06-04"));
-            seanceCours1.setHeureDb(LocalTime.of(13, 7));
-            seanceCours1.setHeureFin(LocalTime.of(13, 20));
+            seanceCours1.setDate(LocalDate.parse("2025-06-12"));
+            seanceCours1.setHeureDb(LocalTime.of(13, 30));
+            seanceCours1.setHeureFin(LocalTime.of(13, 50));
             seanceCours1.setNow(false);
             seanceCours1.setCoursId("1");
 //            seanceCours1.getPointageIds().add("1");
@@ -34,7 +34,7 @@ public class SeanceCoursMock implements CommandLineRunner {
 
             SeanceCours seanceCours2 = new SeanceCours();
             seanceCours2.setId("2");
-            seanceCours2.setDate(LocalDate.parse("2025-06-04"));
+            seanceCours2.setDate(LocalDate.parse("2025-06-12"));
             seanceCours2.setHeureDb(LocalTime.of(16, 27));
             seanceCours2.setHeureFin(LocalTime.of(16, 57));
             seanceCours2.setNow(false);

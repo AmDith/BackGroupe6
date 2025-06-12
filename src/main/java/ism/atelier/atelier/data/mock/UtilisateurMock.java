@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Order(9)
-//@Component
+@Order(9)
+@Component
 @RequiredArgsConstructor
 public class UtilisateurMock implements CommandLineRunner {
 
@@ -32,10 +32,7 @@ public class UtilisateurMock implements CommandLineRunner {
             vigile.setLogin("tidiane.ba");
             vigile.setPassword(passwordEncoder.encode("123456")); // encodé ici
             vigile.setRoleId("3");
-//            vigile.setEtudiantId(null);
-//            vigile.setProfesseurId(null);
-//            vigile.getPointageIds().add("1");
-//            vigile.getPointageIds().add("3");
+            vigile.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749734018/avatars-vCyCUJLVDx3zp3L9-fHpBaQ-t240x240_r7nuxr.jpg");
             utilisateurs.add(vigile);
 
             Utilisateur prof2 = new Utilisateur();
@@ -45,9 +42,8 @@ public class UtilisateurMock implements CommandLineRunner {
             prof2.setLogin("amina.diop");
             prof2.setPassword(passwordEncoder.encode("profpass"));
             prof2.setRoleId("3");
-//            prof2.setEtudiantId(null);
             prof2.setProfesseurId("1");
-//            prof2.getPointageIds().add("2");
+            prof2.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749734018/avatars-vCyCUJLVDx3zp3L9-fHpBaQ-t240x240_r7nuxr.jpg");
             utilisateurs.add(prof2);
 
             Utilisateur prof1 = new Utilisateur();
@@ -57,8 +53,8 @@ public class UtilisateurMock implements CommandLineRunner {
             prof1.setLogin("ousmane.dia");
             prof1.setPassword(passwordEncoder.encode("profpass"));
             prof1.setRoleId("3");
-//            prof1.setEtudiantId(null);
             prof1.setProfesseurId("2");
+            prof1.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749734018/avatars-vCyCUJLVDx3zp3L9-fHpBaQ-t240x240_r7nuxr.jpg");
             utilisateurs.add(prof1);
 
             Utilisateur et1 = new Utilisateur();
@@ -69,6 +65,7 @@ public class UtilisateurMock implements CommandLineRunner {
             et1.setPassword(passwordEncoder.encode("etupass"));
             et1.setRoleId("2");
             et1.setEtudiantId("1");
+            et1.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749732993/la-senegalaise-sira-fall-fait-partie-des-plus-de-200-etudiants-etrangers-inscrits-a-l-iut-de-longwy-photo-dr-1639232338_trvdjw.jpg");
             utilisateurs.add(et1);
 
             Utilisateur et2 = new Utilisateur();
@@ -79,6 +76,7 @@ public class UtilisateurMock implements CommandLineRunner {
             et2.setPassword(passwordEncoder.encode("etupass"));
             et2.setRoleId("2");
             et2.setEtudiantId("2");
+            et2.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1748928790/samples/man-portrait.jpg");
             utilisateurs.add(et2);
 
             Utilisateur et3 = new Utilisateur();
@@ -89,6 +87,7 @@ public class UtilisateurMock implements CommandLineRunner {
             et3.setPassword(passwordEncoder.encode("etupass"));
             et3.setRoleId("2");
             et3.setEtudiantId("3");
+            et3.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749733311/img-20170321-wa0008_hgoq3d.jpg");
             utilisateurs.add(et3);
 
             Utilisateur et4 = new Utilisateur();
@@ -99,6 +98,7 @@ public class UtilisateurMock implements CommandLineRunner {
             et4.setPassword(passwordEncoder.encode("etupass"));
             et4.setRoleId("2");
             et4.setEtudiantId("4");
+            et4.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749733453/1000_F_219025521_A31RZn4KaZiieuTnuQoj1kan4FyuZKga_uqx5dk.jpg");
             utilisateurs.add(et4);
 
             Utilisateur et5 = new Utilisateur();
@@ -109,15 +109,17 @@ public class UtilisateurMock implements CommandLineRunner {
             et5.setPassword(passwordEncoder.encode("etupass"));
             et5.setRoleId("2");
             et5.setEtudiantId("5");
+            et5.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749733582/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f6471566a55613172306f2d4c45673d3d2d3532333330353532332e313530616130396333386362336136303235373437393530313733392e6a7067_azipoq.jpg");
             utilisateurs.add(et5);
 
             Utilisateur admin = new Utilisateur();
             admin.setId("9");
-            admin.setNomComple("Amour");
+            admin.setNomComple("KANE DIABY");
             admin.setTel("+221780000008");
-            admin.setLogin("amour");
+            admin.setLogin("KANE DIABY");
             admin.setPassword(passwordEncoder.encode("adminpass"));
             admin.setRoleId("1");
+            admin.setImage("https://res.cloudinary.com/dgbz1s1wj/image/upload/v1749734018/avatars-vCyCUJLVDx3zp3L9-fHpBaQ-t240x240_r7nuxr.jpg");
             utilisateurs.add(admin);
 
             utilisateurRepository.saveAll(utilisateurs);

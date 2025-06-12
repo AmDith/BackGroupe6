@@ -8,4 +8,5 @@ public class Personne {
     @Id
     private String id;
     private String nomComple;
+    private String image;
 }

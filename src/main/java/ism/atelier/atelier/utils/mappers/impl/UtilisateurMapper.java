@@ -20,7 +20,7 @@ public class UtilisateurMapper {
                     .id(utilisateur.getId())
                     .nomUtilisateur(utilisateur.getLogin())
                     .nomRole(role != null ? role.getName() : null)
-                    .image("default.jpg")
+                    .image(utilisateur.getImage())
                     .build();
         }
 
@@ -31,7 +31,7 @@ public class UtilisateurMapper {
                     .nomComplet(etudiant.getNomComple())
                     .nomClasse(nomClasse)
                     .roleId(utilisateur.getRoleId())
-                    .image("default.jpg")
+                    .image(utilisateur.getImage())
                     .build();
         }
 

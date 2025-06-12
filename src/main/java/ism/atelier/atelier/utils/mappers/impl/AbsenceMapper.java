@@ -40,7 +40,7 @@ public class AbsenceMapper {
                 .matricule(etudiant.getMatriculeE())
                 .nomClasse(classe.getName())
                 .nomModule(module.getName())
-                .image("default.jpg")
+                .image(etudiant.getImage())
                 .etatAbsence(absence.getJustificationId() != null ? "JUSTIFIE" : "NON-JUSTIFIE")
                 .build();
     }

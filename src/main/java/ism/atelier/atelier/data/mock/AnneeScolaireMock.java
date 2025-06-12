@@ -9,8 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-//@Order(10)
-//@Component
+@Order(10)
+@Component
 @RequiredArgsConstructor
 public class AnneeScolaireMock implements CommandLineRunner {
 
