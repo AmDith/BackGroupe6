@@ -16,6 +16,7 @@ public class JustificationWebDto {
     private String nomModule;
     private String matricule;
     private String nomClasse;
+    private String motif;
     private String image;
     private List<String> pieceJointe;
     private String statutJustification;
