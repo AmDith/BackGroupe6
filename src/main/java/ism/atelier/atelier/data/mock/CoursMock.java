@@ -10,8 +10,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Order(6)
-@Component
+//@Order(6)
+//@Component
 @RequiredArgsConstructor
 public class CoursMock implements CommandLineRunner {
     private final CoursRepository coursRepository;
@@ -45,7 +45,7 @@ public class CoursMock implements CommandLineRunner {
 
             Cours cours3 = new Cours();
             cours3.setId("3");
-            cours3.setNbreHeure(2);
+            cours3.setNbreHeure(4);
             cours3.setSemestre("semestre 6");     // 8h00
             cours3.setActif(false);   // 12h00
             cours3.getSeanceCoursIds().add("3");

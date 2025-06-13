@@ -10,6 +10,8 @@ import java.time.LocalDate;
 public class AbsenceListWebDto {
     private String id;
     private LocalDate date;
+    private String heureDb;
+    private String heureFin;
     private String nomEtudiant;
     private String nomModule;
     private String matricule;

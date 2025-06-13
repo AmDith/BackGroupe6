@@ -36,6 +36,8 @@ public class AbsenceMapper {
         return AbsenceListWebDto.builder()
                 .id(absence.getId())
                 .date(seance.getDate())
+                .heureDb(seance.getHeureDb().getHour() + "H")
+                .heureFin(seance.getHeureFin().getHour() + "H")
                 .nomEtudiant(etudiant.getNomComple())
                 .matricule(etudiant.getMatriculeE())
                 .nomClasse(classe.getName())
