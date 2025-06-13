@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins(
                         "http://localhost:4200",               // Angular en local
-                        "https://frontback3.vercel.app",      // Angular en production
+                        "https://gestion-ism.vercel.app",      // Angular en production
                         "http://localhost",                    // Flutter en dev (simulateur)
                         "http://127.0.0.1"                     // Flutter en dev (alternative)
                 )

@@ -129,7 +129,7 @@ public class PointageServiceImpl implements PointageService {
         return pointageRepository.findById(id).orElse(null);
     }
 
-    @Scheduled(cron = "0 57 13 * * *")
+    @Scheduled(cron = "0 25 15 * * *")
     public void verifierEtGenererAbsences() {
         System.out.println("⏰ Lancement de la génération d'absences à 18h");
 
