@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Order(3)
-@Component
+//@Order(3)
+//@Component
 @RequiredArgsConstructor
 public class FiliereMock implements CommandLineRunner {
 

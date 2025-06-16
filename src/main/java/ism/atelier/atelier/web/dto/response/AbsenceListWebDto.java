@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class AbsenceListWebDto {
     private String id;
-    private LocalDateTime date;
+    private LocalDate date;
     private String heureDb;
     private String heureFin;
     private String nomEtudiant;

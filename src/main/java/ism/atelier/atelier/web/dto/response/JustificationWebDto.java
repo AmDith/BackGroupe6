@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class JustificationWebDto {
     private String id;
-    private LocalDateTime date;
+    private LocalDate date;
     private String nomEtudiant;
     private String nomModule;
     private String matricule;

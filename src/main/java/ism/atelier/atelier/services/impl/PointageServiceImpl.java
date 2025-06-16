@@ -41,14 +41,14 @@ public class PointageServiceImpl implements PointageService {
     public void genererListeDePointagesDuJour() {
         LocalDate today = LocalDate.now();
 //        LocalDate today = LocalDate.now(ZoneId.of("Africa/Dakar"));
-        LocalDateTime start = today.atStartOfDay(); // 2025-06-16T00:00
-        System.out.println(start);
-        LocalDateTime end = today.plusDays(1).atStartOfDay(); // 2025-06-17T00:00
-        System.out.println(end);
+//        LocalDateTime start = today.atStartOfDay(); // 2025-06-16T00:00
+//        System.out.println(start);
+//        LocalDateTime end = today.plusDays(1).atStartOfDay(); // 2025-06-17T00:00
+//        System.out.println(end);
 
-        seancesDuJour = seanceCoursRepository.findByDateBetween(start, end);
+//        seancesDuJour = seanceCoursRepository.findByDateBetween(start, end);
         System.out.println("🕓 Date actuelle Render : " + today);
-//        seancesDuJour = seanceCoursRepository.findByDate(today);
+        seancesDuJour = seanceCoursRepository.findByDate(today);
         System.out.println("seancesDuJour");
         System.out.println(seancesDuJour);
         System.out.println("🧪 Vérif séances du " + today);
@@ -134,7 +134,7 @@ public class PointageServiceImpl implements PointageService {
         return pointageRepository.findById(id).orElse(null);
     }
 
-    @Scheduled(cron = "0 15 16 * * *")
+    @Scheduled(cron = "0 52 16 * * *")
     public void verifierEtGenererAbsences() {
         System.out.println("⏰ Lancement de la génération d'absences à 18h");
 

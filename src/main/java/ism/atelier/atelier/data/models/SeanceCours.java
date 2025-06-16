@@ -19,9 +19,9 @@ import java.util.List;
 public class SeanceCours {
     @Id
     private String id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime date;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDate date;
     private LocalTime HeureDb;
     private LocalTime HeureFin;
     private boolean isNow;

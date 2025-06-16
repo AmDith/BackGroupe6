@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AbsenceListDto {
     private String id;
-    private LocalDateTime date;
+    private LocalDate date;
     private String HeureDb;
     private String HeureFin;
     private String etatPointage;
