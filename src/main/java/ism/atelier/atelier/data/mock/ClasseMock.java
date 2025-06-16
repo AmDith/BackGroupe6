@@ -11,8 +11,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Order(7)
-@Component
+//@Order(7)
+//@Component
 @RequiredArgsConstructor
 public class ClasseMock implements CommandLineRunner {
     private final ClasseRepository classeRepository;

@@ -1,6 +1,7 @@
 package ism.atelier.atelier.security.dto;
 
 import ism.atelier.atelier.mobile.dto.response.AbsenceListDto;
+import ism.atelier.atelier.mobile.dto.response.QRcodeEtudiantDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,8 +25,8 @@ public class RestResponseSecurity {
 
     public static Map<String, Object> response2(
             HttpStatus status,
-            List<AbsenceListDto> data1,
-            Object data2,
+            Object data1,
+            List<QRcodeEtudiantDto> data2,
             String type
     ) {
         Map<String, Object> response = new HashMap<>();

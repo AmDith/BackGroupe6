@@ -5,6 +5,7 @@ import ism.atelier.atelier.data.models.Classe;
 import ism.atelier.atelier.data.models.Pointage;
 import ism.atelier.atelier.mobile.controllers.PointageController;
 import ism.atelier.atelier.mobile.dto.request.EtudiantScanDto;
+import ism.atelier.atelier.mobile.dto.response.QRcodeEtudiantDto;
 import ism.atelier.atelier.security.dto.RestResponseSecurity;
 import ism.atelier.atelier.services.*;
 import ism.atelier.atelier.utils.mappers.impl.EtudiantMapper;
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,6 +28,8 @@ public class PointageControllerImpl implements PointageController {
     private final CoursService coursService;
     private final SeanceCoursService seanceCoursService;
     private final ClasseService classeService;
+
+    private final Map<String, LinkedList<QRcodeEtudiantDto>> historiqueParVigile = new HashMap<>();
 
 
     @Override
@@ -151,9 +151,22 @@ public class PointageControllerImpl implements PointageController {
                 }
             }
             var qrcodeEtudiantDto = EtudiantMapper.toQRcodeEtudiantDto(etudiant, nomClasse);
-            Map<String, Object> response = RestResponseSecurity.response(
+
+            String vigileId = etudiantScanDto.getUtilisateurId();
+            historiqueParVigile.putIfAbsent(vigileId, new LinkedList<>());
+            LinkedList<QRcodeEtudiantDto> historique = historiqueParVigile.get(vigileId);
+
+            historique.addFirst(qrcodeEtudiantDto);
+            if (historique.size() > 5) {
+                historique.removeLast();
+            }
+
+
+
+        Map<String, Object> response = RestResponseSecurity.response2(
                     HttpStatus.OK,
                     qrcodeEtudiantDto,
+                    historique,
                     "QRcodeEtudiantDto"
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
