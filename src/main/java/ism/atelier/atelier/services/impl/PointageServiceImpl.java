@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +42,9 @@ public class PointageServiceImpl implements PointageService {
 
     @Scheduled(cron = "0 0 0 * * *")
     public void genererListeDePointagesDuJour() {
-        LocalDate today = LocalDate.now();
-        System.out.println(today);
+//        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(ZoneId.of("Africa/Dakar"));
+        System.out.println("🕓 Date actuelle Render : " + today);
         seancesDuJour = seanceCoursRepository.findByDate(today);
         System.out.println("seancesDuJour");
         System.out.println(seancesDuJour);
@@ -129,7 +131,7 @@ public class PointageServiceImpl implements PointageService {
         return pointageRepository.findById(id).orElse(null);
     }
 
-    @Scheduled(cron = "0 45 13 * * *")
+    @Scheduled(cron = "0 55 14 * * *")
     public void verifierEtGenererAbsences() {
         System.out.println("⏰ Lancement de la génération d'absences à 18h");
 
