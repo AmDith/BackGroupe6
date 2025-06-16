@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
 public interface AbsenceMapper {
     AbsenceMapper INSTANCE = Mappers.getMapper(AbsenceMapper.class);
 
-    Absence toEntity(JustificationAbsentDto justificationDto);
+//    Absence toEntity(JustificationAbsentDto justificationDto);
     AbsenceListDto toListDto(Absence absence);
     AbsenceListWebDto toListWebDto(Absence absence);
 }

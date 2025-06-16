@@ -2,22 +2,28 @@ package ism.atelier.atelier.mobile.controllers;
 
 import ism.atelier.atelier.data.enums.EnumJustification;
 import ism.atelier.atelier.mobile.dto.request.JustificationAbsentDto;
+import ism.atelier.atelier.mobile.dto.request.JustificationRequestDto;
+import ism.atelier.atelier.mobile.dto.response.JustificationResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
 @RequestMapping("/api/justification")
 public interface JustificationMobileController {
-    @PostMapping("/justificatifAbsent")
-    ResponseEntity<?> justificatif(@Valid @RequestBody JustificationAbsentDto justificationDto,
-                                   BindingResult bindingResult);
+//    @PostMapping("/justificatifAbsent")
+//    ResponseEntity<?> justificatif(@Valid @RequestBody JustificationAbsentDto justificationDto,
+//                                   BindingResult bindingResult);
 
-//    @PutMapping("/{id}/valider")
-//    ResponseEntity<?> validerJustification(@PathVariable String id, @RequestParam EnumJustification enumJustification);
-
-//    @GetMapping("/{id}")
-//    ResponseEntity<Map<String, Object>> getById(@PathVariable String id);
+    @PostMapping("/absence/{absenceId}")
+    public ResponseEntity<JustificationResponseDto> justifierAbsence(
+            @PathVariable String absenceId,
+            @ModelAttribute JustificationRequestDto dto,
+            @RequestParam("titre") String titre,
+            @RequestParam("motif") String motif,
+            @RequestParam(value = "pieceJointe", required = false) MultipartFile pieceJointe
+    );
 }

@@ -13,26 +13,28 @@ import java.util.stream.Collectors;
 @Service
 public class AbsenceServiceImpl implements AbsenceService {
     private final AbsenceRepository absenceRepository;
+
     @Override
     public List<Absence> listerToutPointageAbscent() {
-
         return absenceRepository.findAll();
     }
 
     @Override
     public List<Absence> getAllAsenceJustifier() {
         return absenceRepository.findAll().stream()
-                .filter(absence -> absence.getJustificationId() != null)
+                .filter(absence -> absence.getJustification() != null)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Absence getAbsence(String id) {
+
         return absenceRepository.findById(id).orElse(null);
     }
 
     @Override
     public Absence save(Absence absence) {
+
         return absenceRepository.save(absence);
     }
 

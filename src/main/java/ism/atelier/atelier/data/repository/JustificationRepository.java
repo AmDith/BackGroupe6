@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface JustificationRepository extends MongoRepository<Justification, String> {
-        Justification findByEtudiantId(String etudiantId);
+//        Justification findByEtudiantId(String etudiantId);
 //        List<Justification> findAll();
 
 

@@ -1,6 +1,7 @@
 package ism.atelier.atelier.data.models;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -14,4 +15,7 @@ public class Etudiant extends Personne{
 
     private String classeId;
     private List<String> pointageIds = new ArrayList<>();
+
+    @DBRef
+    private Classe classe;
 }

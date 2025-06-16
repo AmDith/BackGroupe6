@@ -14,4 +14,10 @@ public class AbsenceListWebDto {
     private String nomModule;
     private String matricule;
     private String nomClasse;
+    private String etatAbsence;
+    private String images;
+
+
+//            "images": "",
+
 }

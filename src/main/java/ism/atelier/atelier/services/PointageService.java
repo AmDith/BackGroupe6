@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PointageService {
     void pointerEtudiant(Etudiant etudiant, Long utilisateurId);
+    Pointage getById(String pointageId);
 }

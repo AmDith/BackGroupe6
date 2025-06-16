@@ -5,6 +5,8 @@ import ism.atelier.atelier.data.models.Justification;
 import ism.atelier.atelier.mobile.controllers.JustificationMobileController;
 import ism.atelier.atelier.mobile.dto.RestResponseMobile;
 import ism.atelier.atelier.mobile.dto.request.JustificationAbsentDto;
+import ism.atelier.atelier.mobile.dto.request.JustificationRequestDto;
+import ism.atelier.atelier.mobile.dto.response.JustificationResponseDto;
 import ism.atelier.atelier.services.AbsenceService;
 import ism.atelier.atelier.services.JustificationService;
 import ism.atelier.atelier.utils.mappers.JustificationMapper;
@@ -14,8 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,35 +29,33 @@ import java.util.Map;
 public class JustificationMobileControllerImpl implements JustificationMobileController {
     private final JustificationService justificationService;
     private final JustificationMapper justificationMapper;
-    private final AbsenceService absenceService;
+    private final AbsenceService absenceService;;
 
-    @Override
-    public ResponseEntity<?> justificatif(JustificationAbsentDto justificationDto,
-                                          BindingResult bindingResult) {
+//    public ResponseEntity<JustificationResponseDto> justifierAbsence(String absenceId, JustificationRequestDto dto)  {
+//        JustificationResponseDto response = justificationService.creerJustification(absenceId, dto);
+//        return ResponseEntity.ok(response);
+//    }
 
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errors.put(error.getField(), error.getDefaultMessage());
-            }
-            return ResponseEntity.badRequest().body(errors);
+        @PostMapping("/absence/{absenceId}")
+        public ResponseEntity<JustificationResponseDto> justifierAbsence(
+                @PathVariable String absenceId,
+                @ModelAttribute JustificationRequestDto dto,
+
+                @RequestParam("titre") String titre,
+                @RequestParam("motif") String motif,
+                @RequestParam(value = "pieceJointe", required = false) MultipartFile pieceJointe) {
+
+            JustificationRequestDto requestDto = JustificationRequestDto.builder()
+                    .titre(titre)
+                    .motif(motif)
+                    .pieceJointe(pieceJointe)
+                    .build();
+
+            JustificationResponseDto response = justificationService.creerJustification(absenceId, dto);
+            return ResponseEntity.ok(response);
         }
-        var absence = absenceService.getAbsence(justificationDto.getAbsenceId());
-        if (absence == null) {
-            return ResponseEntity.badRequest().body("Absence non trouvée");
-        }
-        Justification justification = new Justification();
-        justification.setMotifs(justificationDto.getMotifs());
-        justification.setTitre(justificationDto.getTitre());
-        justification.setPieceJointe(justificationDto.getPieceJointe());
-        justification = justificationService.save(justification);
 
-        absence.setJustificationId(justification.getId());
-        absenceService.save(absence);
-//        return ResponseEntity.status(HttpStatus.ACCEPTED)
-//                .body("Justification envoyée avec succès");
-        return ResponseEntity.ok("Justification envoyer avec succès");
-    }
+
 
 //    @Override
 //    public ResponseEntity<JustificationListWebDto> validerJustification(String id, EnumJustification enumJustification) {

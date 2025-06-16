@@ -1,17 +1,13 @@
 package ism.atelier.atelier.web.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ValiderJustificationDto {
-    private Long justificationId;
-    private String etat;
-
-//    private String enumJustification;
+public class JustificationWebRequestDto {
+    private String justificationId;
+    private String decision;
 }
