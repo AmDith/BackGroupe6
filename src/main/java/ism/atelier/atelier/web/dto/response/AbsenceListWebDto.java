@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Builder
 @Data
 public class AbsenceListWebDto {
     private String id;
-    private LocalDate date;
+    private LocalDateTime date;
     private String heureDb;
     private String heureFin;
     private String nomEtudiant;

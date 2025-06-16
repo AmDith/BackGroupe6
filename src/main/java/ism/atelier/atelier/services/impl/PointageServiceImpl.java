@@ -42,7 +42,9 @@ public class PointageServiceImpl implements PointageService {
         LocalDate today = LocalDate.now();
 //        LocalDate today = LocalDate.now(ZoneId.of("Africa/Dakar"));
         LocalDateTime start = today.atStartOfDay(); // 2025-06-16T00:00
+        System.out.println(start);
         LocalDateTime end = today.plusDays(1).atStartOfDay(); // 2025-06-17T00:00
+        System.out.println(end);
 
         seancesDuJour = seanceCoursRepository.findByDateBetween(start, end);
         System.out.println("🕓 Date actuelle Render : " + today);

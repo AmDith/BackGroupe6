@@ -10,10 +10,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-//@Order(11)
-//@Component
+@Order(11)
+@Component
 @RequiredArgsConstructor
 public class SeanceCoursMock implements CommandLineRunner {
     private final SeanceCoursRepository seanceCoursRepository;
@@ -23,7 +24,7 @@ public class SeanceCoursMock implements CommandLineRunner {
         if (seanceCours.isEmpty()) {
             SeanceCours seanceCours1 = new SeanceCours();
             seanceCours1.setId("1");
-            seanceCours1.setDate(LocalDate.of(2025, 6, 16));
+            seanceCours1.setDate(LocalDate.of(2025, 6, 16).atStartOfDay());
 //            sc.setDate(LocalDate.of(2025, 6, 16));
             seanceCours1.setHeureDb(LocalTime.of(15, 55));
             seanceCours1.setHeureFin(LocalTime.of(16, 15));
@@ -33,7 +34,7 @@ public class SeanceCoursMock implements CommandLineRunner {
 
             SeanceCours seanceCours2 = new SeanceCours();
             seanceCours2.setId("2");
-            seanceCours2.setDate(LocalDate.of(2025, 6, 16));
+            seanceCours2.setDate(LocalDate.of(2025, 6, 16).atStartOfDay());
             seanceCours2.setHeureDb(LocalTime.of(15, 15));
             seanceCours2.setHeureFin(LocalTime.of(15, 59));
             seanceCours2.setNow(false);
@@ -43,7 +44,7 @@ public class SeanceCoursMock implements CommandLineRunner {
 
             SeanceCours seanceCours3 = new SeanceCours();
             seanceCours3.setId("3");
-            seanceCours3.setDate(LocalDate.of(2025, 6, 16));
+            seanceCours3.setDate(LocalDate.of(2025, 6, 16).atStartOfDay());
             seanceCours3.setHeureDb(LocalTime.of(15, 55));
             seanceCours3.setHeureFin(LocalTime.of(16, 15));
             seanceCours3.setNow(false);
