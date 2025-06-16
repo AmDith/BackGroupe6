@@ -23,16 +23,17 @@ public class SeanceCoursMock implements CommandLineRunner {
         if (seanceCours.isEmpty()) {
             SeanceCours seanceCours1 = new SeanceCours();
             seanceCours1.setId("1");
-            seanceCours1.setDate(LocalDate.parse("2025-06-16"));
-            seanceCours1.setHeureDb(LocalTime.of(14, 25));
-            seanceCours1.setHeureFin(LocalTime.of(14, 55));
+            seanceCours1.setDate(LocalDate.of(2025, 6, 16));
+//            sc.setDate(LocalDate.of(2025, 6, 16));
+            seanceCours1.setHeureDb(LocalTime.of(15, 35));
+            seanceCours1.setHeureFin(LocalTime.of(15, 50));
             seanceCours1.setNow(false);
             seanceCours1.setCoursId("1");
             seanceCours.add(seanceCours1);
 
             SeanceCours seanceCours2 = new SeanceCours();
             seanceCours2.setId("2");
-            seanceCours2.setDate(LocalDate.parse("2025-06-16"));
+            seanceCours2.setDate(LocalDate.of(2025, 6, 16));
             seanceCours2.setHeureDb(LocalTime.of(15, 15));
             seanceCours2.setHeureFin(LocalTime.of(15, 59));
             seanceCours2.setNow(false);
@@ -42,9 +43,9 @@ public class SeanceCoursMock implements CommandLineRunner {
 
             SeanceCours seanceCours3 = new SeanceCours();
             seanceCours3.setId("3");
-            seanceCours3.setDate(LocalDate.parse("2025-06-16"));
-            seanceCours3.setHeureDb(LocalTime.of(14, 25));
-            seanceCours3.setHeureFin(LocalTime.of(14, 55));
+            seanceCours3.setDate(LocalDate.of(2025, 6, 16));
+            seanceCours3.setHeureDb(LocalTime.of(15, 35));
+            seanceCours3.setHeureFin(LocalTime.of(15, 50));
             seanceCours3.setNow(false);
             seanceCours3.setCoursId("2");
             seanceCours.add(seanceCours3);

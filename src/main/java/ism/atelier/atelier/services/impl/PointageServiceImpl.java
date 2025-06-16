@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,8 +41,12 @@ public class PointageServiceImpl implements PointageService {
     public void genererListeDePointagesDuJour() {
 //        LocalDate today = LocalDate.now();
         LocalDate today = LocalDate.now(ZoneId.of("Africa/Dakar"));
+        LocalDateTime start = today.atStartOfDay(); // 2025-06-16T00:00
+        LocalDateTime end = today.plusDays(1).atStartOfDay(); // 2025-06-17T00:00
+
+        seancesDuJour = seanceCoursRepository.findByDateBetween(start, end);
         System.out.println("🕓 Date actuelle Render : " + today);
-        seancesDuJour = seanceCoursRepository.findByDate(today);
+//        seancesDuJour = seanceCoursRepository.findByDate(today);
         System.out.println("seancesDuJour");
         System.out.println(seancesDuJour);
         System.out.println("🧪 Vérif séances du " + today);
@@ -131,7 +132,7 @@ public class PointageServiceImpl implements PointageService {
         return pointageRepository.findById(id).orElse(null);
     }
 
-    @Scheduled(cron = "0 55 14 * * *")
+    @Scheduled(cron = "0 59 15 * * *")
     public void verifierEtGenererAbsences() {
         System.out.println("⏰ Lancement de la génération d'absences à 18h");
 
